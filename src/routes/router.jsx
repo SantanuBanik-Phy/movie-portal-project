@@ -7,6 +7,7 @@ import Login from "../components/Login";
 import AddMovie from "../pages/AddMovie";
 import AllMovies from "../pages/AllMovies";
 import MovieDetailsPage from "../pages/MovieDetailsPage";
+import MyFavorites from "../pages/MyFavorites";
 
 
 
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
     element: <MovieDetailsPage />,
    
     },
+    {
+      path: "/my-favorites",
+      element: <MyFavorites />
+  },
    
     ],
   },

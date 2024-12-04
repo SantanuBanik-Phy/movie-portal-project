@@ -1,7 +1,7 @@
 // src/components/MovieCard.jsx
 import { Link } from "react-router-dom";
 
-const MovieCard = ({ movie,loadedMovies,setLoadedMovies }) => {
+const MovieCard = ({ movie}) => {
    
     
     return (

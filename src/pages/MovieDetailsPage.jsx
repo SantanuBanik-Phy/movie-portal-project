@@ -1,19 +1,28 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../provider/AuthProvider";
 
 const MovieDetailsPage = () => {
+    const { user } = useContext(AuthContext);
     const { id } = useParams(); // Extract the movie ID from the route
     const [movie, setMovie] = useState(null);
+    const [isFavorite, setIsFavorite] = useState(false); 
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Fetch movie details from the backend using the ID
         const fetchMovieDetails = async () => {
             try {
                 const response = await fetch(`http://localhost:3000/movies/${id}`);
                 const data = await response.json();
-                setMovie(data); // Set movie details
+                setMovie(data);
+
+                // Check if the movie is already in favorites
+                if (user) {
+                    const favoritesResponse = await fetch(`http://localhost:3000/favorites?email=${user.email}&movieId=${id}`);
+                    const favoritesData = await favoritesResponse.json();
+                    setIsFavorite(favoritesData.length > 0);
+                }
             } catch (error) {
                 console.error("Error fetching movie details:", error);
                 Swal.fire({
@@ -23,10 +32,12 @@ const MovieDetailsPage = () => {
                     confirmButtonText: "OK",
                 });
             }
+          
+           
         };
 
         fetchMovieDetails();
-    }, [id]);
+    }, [id, user]);
 
     const handleDelete = async (_id) => {
         Swal.fire({
@@ -67,11 +78,57 @@ const MovieDetailsPage = () => {
             }
         });
     };
+    const handleAddToFavorites = async () => {
+        if (isFavorite) {
+            Swal.fire({
+                title: "Info!",
+                text: "This movie is already in your favorites.",
+                icon: "info",
+                confirmButtonText: "Ok",
+            });
+            return;
+        }
+
+        try {
+            const response = await fetch("http://localhost:3000/favorites", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({...movie, userEmail: user.email, movieId: id }), // Include movieId
+            });
+
+            if (response.ok) {
+                Swal.fire({
+                    title: "Success!",
+                    text: "Movie added to favorites!",
+                    icon: "success",
+                    confirmButtonText: "Ok",
+                });
+                setIsFavorite(true); // Update favorite status
+            } else {
+                Swal.fire({
+                    title: "Error!",
+                    text: "Failed to add the movie to favorites. Please try again.",
+                    icon: "error",
+                    confirmButtonText: "Ok",
+                });
+            }
+        } catch (error) {
+            console.error("Error adding to favorites:", error);
+            Swal.fire({
+                title: "Error!",
+                text: "Failed to add the movie to favorites. Please try again.",
+                icon: "error",
+                confirmButtonText: "Ok",
+            });
+        }
+    };
 
     if (!movie) {
         return (
             <div className="text-center">
-                <h2 className="text-2xl font-bold">Loading...</h2>
+                <h2 className="text-2xl font-bold">No Movie Found</h2>
             </div>
         );
     }
@@ -96,7 +153,7 @@ const MovieDetailsPage = () => {
                         >
                             Delete Movie
                         </button>
-                        <button className="btn btn-primary">Add to Favorite</button>
+                        <button onClick={handleAddToFavorites} className="btn btn-primary">Add to Favorite</button>
                     </div>
                 </div>
             </div>

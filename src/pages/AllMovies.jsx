@@ -26,7 +26,7 @@ const fakeMovies = [
 
 const AllMovies = () => {
     const [movies, setMovies] = useState([]);
-    const [loading, setLoading] = useState(true);
+    
 
     useEffect(() => {
         const fetchMovies = async () => {
@@ -38,9 +38,7 @@ const AllMovies = () => {
                 setMovies(allMovies);
             } catch (error) {
                 console.error("Error fetching movies:", error);
-            } finally {
-                setLoading(false);
-            }
+            } 
         };
 
         fetchMovies();
@@ -49,17 +47,13 @@ const AllMovies = () => {
     return (
         <div className="container mx-auto p-6 my-12">
             <h1 className="text-4xl font-bold text-center mb-8">All Movies</h1>
-            {loading ? (
-                <div className="text-center">
-                    <p>Loading movies...</p>
-                </div>
-            ) : (
+           
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {movies.map((movie) => (
                         <MovieCard key={movie._id} movie={movie} />
                     ))}
                 </div>
-            )}
+            
         </div>
     );
 };
