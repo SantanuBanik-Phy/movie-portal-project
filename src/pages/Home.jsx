@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import Banner from "../components/Banner";
 import MovieCard from "../components/MovieCard";
 
@@ -38,8 +38,10 @@ const fakeMovies = [
 ];
 
 const Home = () => {
-    const [movies, setMovies] = useState([]);
-    const [loading, setLoading] = useState(true);
+  const movies = useLoaderData()
+   
+    const [loadedMovies, setLoadedMovies] = useState(movies);
+   
 
     useEffect(() => {
         const fetchMovies = async () => {
@@ -53,12 +55,10 @@ const Home = () => {
                 // Sort movies by rating (descending) and take the top 6
                 const featuredMovies = allMovies.sort((a, b) => b.rating - a.rating).slice(0, 6);
 
-                setMovies(featuredMovies);
+                setLoadedMovies(featuredMovies);
             } catch (error) {
                 console.error("Error fetching movies:", error);
-            } finally {
-                setLoading(false);
-            }
+            } 
         };
 
         fetchMovies();
@@ -70,17 +70,13 @@ const Home = () => {
             {/* Featured Movies Section */}
             <div className="container mx-auto p-6 my-12">
                 <h2 className="text-3xl font-bold text-center mb-8">Featured Movies</h2>
-                {loading ? (
-                    <div className="text-center">
-                        <p>Loading movies...</p>
-                    </div>
-                ) : (
+               
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {movies.map((movie) => (
-                            <MovieCard key={movie._id} movie={movie} />
+                        {loadedMovies.map((movie) => (
+                            <MovieCard key={movie._id} movie={movie} loadedMovies={loadedMovies} setLoadedMovies={setLoadedMovies} />
                         ))}
                     </div>
-                )}
+                
                 <div className="text-center mt-8">
                     <Link to="/all-movies" className="btn btn-primary">
                         See All Movies

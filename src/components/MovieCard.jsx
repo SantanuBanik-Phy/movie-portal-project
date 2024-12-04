@@ -1,8 +1,8 @@
 // src/components/MovieCard.jsx
 import { Link } from "react-router-dom";
 
-const MovieCard = ({ movie }) => {
-    console.log(movie)
+const MovieCard = ({ movie,loadedMovies,setLoadedMovies }) => {
+   
     
     return (
         <div className="card bg-base-100 shadow-xl">
