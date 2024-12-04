@@ -4,6 +4,7 @@ import AuthLayout from "../layouts/AuthLayout";
 import Home from "../pages/Home";
 import Register from "../components/Register";
 import Login from "../components/Login";
+import AddMovie from "../pages/AddMovie";
 
 
 
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
         element: <Home />,
        
       },
+      {
+        path:"/add-movie",
+        element: <AddMovie />
+    },
    
     ],
   },
