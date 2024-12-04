@@ -5,6 +5,7 @@ import Home from "../pages/Home";
 import Register from "../components/Register";
 import Login from "../components/Login";
 import AddMovie from "../pages/AddMovie";
+import AllMovies from "../pages/AllMovies";
 
 
 
@@ -22,10 +23,15 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
        
+       
       },
       {
         path:"/add-movie",
         element: <AddMovie />
+    },
+    {
+      path: "/all-movies",
+      element: <AllMovies />
     },
    
     ],

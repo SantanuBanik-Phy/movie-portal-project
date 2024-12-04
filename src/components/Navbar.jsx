@@ -28,6 +28,7 @@ const Navbar = () => {
         <ul className="menu menu-horizontal  md:space-x-8 space-x-3 mb-4 text-lg">
           
             <NavLink to="/" >Home</NavLink>
+            <NavLink to="/all-movies" >All Movies</NavLink>
           
           
             
