@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import Banner from "../components/Banner";
 import MovieCard from "../components/MovieCard";
+import UpcomingMovies from "../components/UpcomingMovies";
+import MovieNews from "../components/MovieNews";
 
 const Home = () => {
   const movies = useLoaderData();
@@ -72,6 +74,17 @@ const Home = () => {
         </div>
         </>
                 )}
+
+                <div className="container mx-auto ">
+                <h2 className="text-4xl font-bold ml-24 ">Upcoming Movies</h2>
+               <UpcomingMovies></UpcomingMovies>
+            </div>
+
+            {/* Extra Section 2 - Example: Movie News */}
+            <div className="container mx-auto ">
+                <h2 className="text-3xl font-bold text-center mb-8">Latest Movie News</h2>
+               <MovieNews></MovieNews>
+            </div>
       </div>
     </div>
   );

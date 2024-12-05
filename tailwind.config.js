@@ -9,7 +9,7 @@ export default {
     extend: {},
   },
   plugins: [
-    require('daisyui'),
+    require('daisyui'), // Include DaisyUI for prebuilt components
+     // Include the line-clamp plugin
   ],
-}
-
+};

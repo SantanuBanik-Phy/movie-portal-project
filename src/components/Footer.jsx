@@ -256,8 +256,8 @@ data-tip="GitHub"
                                 >
                                     <path d="M12 0c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602zm0 11c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z" />
                                 </svg>
-                                203 Fake St. Mountain View, <br /> San Francisco,
-                                California, USA
+                                203/SouthShadebpur,Feni <br /> Dhaka,Bangladesh
+                               
                             </li>
                             <li className="flex gap-2 items-start">
                                 <svg
@@ -279,7 +279,7 @@ data-tip="GitHub"
                                 >
                                     <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z" />
                                 </svg>
-                                info@ecoadventure.com
+                                info@ebdmovieportal.com
                             </li>
                         </ul>
                     </div>
@@ -289,7 +289,7 @@ data-tip="GitHub"
                 <div className="border-t border-gray-700 my-6"></div>
                 <div className="text-center text-gray-400 text-sm">
                     <p>
-                        © {currentYear} Eco-Adventure. All rights reserved.
+                        © {currentYear} Movie-Portal. All rights reserved.
                        
                     </p>
                 </div>
