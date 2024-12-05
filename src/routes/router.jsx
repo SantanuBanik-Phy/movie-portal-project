@@ -8,6 +8,7 @@ import AddMovie from "../pages/AddMovie";
 import AllMovies from "../pages/AllMovies";
 import MovieDetailsPage from "../pages/MovieDetailsPage";
 import MyFavorites from "../pages/MyFavorites";
+import UpdateMovieForm from "../components/UpdatedMovieForm";
 
 
 
@@ -45,6 +46,12 @@ const router = createBrowserRouter([
       path: "/my-favorites",
       element: <MyFavorites />
   },
+  {
+    path: "/update-movie/:id", 
+    element: <UpdateMovieForm />,
+    
+
+},
    
     ],
   },

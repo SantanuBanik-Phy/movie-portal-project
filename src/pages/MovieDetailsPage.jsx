@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../provider/AuthProvider";
 
@@ -154,6 +154,9 @@ const MovieDetailsPage = () => {
                             Delete Movie
                         </button>
                         <button onClick={handleAddToFavorites} className="btn btn-primary">Add to Favorite</button>
+                        <Link to={`/update-movie/${movie._id}`} className="btn btn-warning">
+                    Update Movie
+                </Link>
                     </div>
                 </div>
             </div>

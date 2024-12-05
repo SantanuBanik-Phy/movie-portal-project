@@ -1,15 +1,40 @@
-import { useContext, useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Rating } from "react-simple-star-rating";
-import { AuthContext } from "../provider/AuthProvider";
-import Swal from "sweetalert2";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
+import { Rating } from 'react-simple-star-rating';
+import { useParams } from "react-router-dom";
 
-const AddMovieForm = () => {
-    const { user } = useContext(AuthContext);
-    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+const UpdateMovieForm = () => {
+    const { id } = useParams();
+    const { register, handleSubmit, formState: { errors }, setValue,reset } = useForm();
     const [rating, setRating] = useState(0);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchMovie = async () => {
+            try {
+                const response = await fetch(`http://localhost:3000/movies/${id}`);
+                const movieData = await response.json();
+               
+
+                // Set default values for the form fields
+                setValue("poster", movieData.poster);
+                setValue("title", movieData.title);
+                setValue("genre", movieData.genre);
+                setValue("duration", movieData.duration);
+                setValue("releaseYear", movieData.releaseYear);
+                setRating(movieData.rating);
+                setValue("summary", movieData.summary);
+            } catch (error) {
+                console.error("Error fetching movie details:", error);
+                toast.error("Failed to fetch movie details.");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchMovie();
+    }, [id, setValue]);
 
     const handleStarClick = (value) => {
         setRating(value);
@@ -20,13 +45,11 @@ const AddMovieForm = () => {
             toast.error("Please provide a rating.");
             return;
         }
-
-        data.userEmail = user.email;
         data.rating = rating;
 
         try {
-            const response = await fetch("http://localhost:3000/movies", {
-                method: "POST", 
+            const response = await fetch(`http://localhost:3000/movies/${id}`, {
+                method: "PUT", 
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -34,44 +57,39 @@ const AddMovieForm = () => {
             });
 
             if (response.ok) {
-                Swal.fire({
-                    title: "Success!",
-                    text: "Movie added successfully.",
-                    icon: "success",
-                    confirmButtonText: "Ok",
-                });
+                toast.success("Movie updated successfully!");
                 reset(); 
                 setRating(0);
             } else {
-                toast.error("Failed to add the movie. Please try again.");
+                toast.error("Failed to update movie.");
             }
         } catch (error) {
-            console.error("Error adding movie:", error);
-            toast.error("Failed to add the movie. Please try again.");
+            console.error("Error updating movie:", error);
+            toast.error("Failed to update movie.");
         }
     };
-
-   
-
     const handleValidationErrors = () => {
         Object.keys(errors).forEach((key) => {
             toast.error(errors[key].message);
         });
     };
 
+    if (loading) {
+        return (
+            <div className="text-center">
+                <p>Loading movie details...</p>
+            </div>
+        );
+    }
+
     return (
         <div className="container mx-auto p-6">
-            <ToastContainer position="top-center" />
-            <h1 className="text-4xl font-bold text-center mb-8">Add New Movie</h1>
-            <form
-                onSubmit={handleSubmit(onSubmit, handleValidationErrors)}
-                className="max-w-3xl mx-auto"
-            >
+            <ToastContainer position={"top-center"}></ToastContainer>
+            <h1 className="text-4xl font-bold text-center mb-8">Update Movie</h1>
+            <form onSubmit={handleSubmit(onSubmit,handleValidationErrors)} className="max-w-3xl mx-auto">
                 {/* Movie Poster */}
                 <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Movie Poster URL</span>
-                    </label>
+                    <label className="label">Movie Poster URL</label>
                     <input
                         type="text"
                         {...register("poster", {
@@ -83,13 +101,12 @@ const AddMovieForm = () => {
                         })}
                         className="input input-bordered"
                     />
+               
                 </div>
 
                 {/* Movie Title */}
                 <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Movie Title</span>
-                    </label>
+                    <label className="label">Movie Title</label>
                     <input
                         type="text"
                         {...register("title", {
@@ -101,13 +118,12 @@ const AddMovieForm = () => {
                         })}
                         className="input input-bordered"
                     />
+                  
                 </div>
 
                 {/* Genre */}
                 <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Genre</span>
-                    </label>
+                    <label className="label">Genre</label>
                     <select
                         {...register("genre", { required: "Please select a genre" })}
                         className="select select-bordered"
@@ -117,13 +133,12 @@ const AddMovieForm = () => {
                         <option value="drama">Drama</option>
                         <option value="horror">Horror</option>
                     </select>
+                   
                 </div>
 
                 {/* Duration */}
                 <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Duration (minutes)</span>
-                    </label>
+                    <label className="label">Duration (minutes)</label>
                     <input
                         type="number"
                         {...register("duration", {
@@ -132,13 +147,12 @@ const AddMovieForm = () => {
                         })}
                         className="input input-bordered"
                     />
+                    
                 </div>
 
                 {/* Release Year */}
                 <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Release Year</span>
-                    </label>
+                    <label className="label">Release Year</label>
                     <select
                         {...register("releaseYear", { required: "Please select a release year" })}
                         className="select select-bordered"
@@ -148,29 +162,24 @@ const AddMovieForm = () => {
                         <option value="2023">2023</option>
                         <option value="2022">2022</option>
                     </select>
+                
                 </div>
 
                 {/* Rating */}
                 <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Rating</span>
-                    </label>
-                    <div className="flex"> 
-                        <Rating
-                            onClick={handleStarClick}
-                            ratingValue={rating}
-                            initialValue={0}
-                            size={30}
-                            transition={true}
-                        />
-                    </div>
+                    <label className="label">Rating</label>
+                    <Rating
+                        onClick={handleStarClick}
+                        ratingValue={rating}
+                        initialValue={rating}
+                        size={30}
+                        transition
+                    />
                 </div>
 
                 {/* Summary */}
                 <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Summary</span>
-                    </label>
+                    <label className="label">Summary</label>
                     <textarea
                         {...register("summary", {
                             required: "Summary is required",
@@ -178,16 +187,13 @@ const AddMovieForm = () => {
                         })}
                         className="textarea textarea-bordered h-24"
                     />
+                   
                 </div>
 
-                <div className="form-control mt-6">
-                    <button type="submit" className="btn btn-primary">
-                        Add Movie
-                    </button>
-                </div>
+                <button type="submit" className="btn btn-primary mt-4">Update Movie</button>
             </form>
         </div>
     );
 };
 
-export default AddMovieForm;
+export default UpdateMovieForm;
