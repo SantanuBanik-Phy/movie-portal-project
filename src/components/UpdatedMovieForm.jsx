@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { Rating } from 'react-simple-star-rating';
 import { useParams } from "react-router-dom";
 
+
 const UpdateMovieForm = () => {
     const { id } = useParams();
     const { register, handleSubmit, formState: { errors }, setValue,reset } = useForm();
@@ -77,13 +78,16 @@ const UpdateMovieForm = () => {
     if (loading) {
         return (
             <div className="text-center">
-                <p>Loading movie details...</p>
+                
+                <span className="loading loading-infinity loading-lg"></span>
             </div>
         );
     }
 
     return (
         <div className="container mx-auto p-6">
+          
+            
             <ToastContainer position={"top-center"}></ToastContainer>
             <h1 className="text-4xl font-bold text-center mb-8">Update Movie</h1>
             <form onSubmit={handleSubmit(onSubmit,handleValidationErrors)} className="max-w-3xl mx-auto">

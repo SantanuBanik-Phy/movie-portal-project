@@ -8,6 +8,7 @@ const MovieDetailsPage = () => {
     const { id } = useParams(); // Extract the movie ID from the route
     const [movie, setMovie] = useState(null);
     const [isFavorite, setIsFavorite] = useState(false); 
+    const [loading, setLoading] = useState(true); 
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -31,6 +32,8 @@ const MovieDetailsPage = () => {
                     icon: "error",
                     confirmButtonText: "OK",
                 });
+            }finally {
+                setLoading(false); 
             }
           
            
@@ -135,6 +138,12 @@ const MovieDetailsPage = () => {
 
     return (
         <div className="container mx-auto p-6 my-12">
+             {loading ? ( // Conditionally render loading indicator
+                <div className="text-center">
+                <span className="loading loading-infinity loading-lg"></span>
+                </div>
+            ) : ( 
+                <>
             <h1 className="text-4xl font-bold text-center mb-8">{movie.title}</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -160,6 +169,8 @@ const MovieDetailsPage = () => {
                     </div>
                 </div>
             </div>
+            </>
+            )}
         </div>
     );
 };

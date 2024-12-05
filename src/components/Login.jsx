@@ -57,7 +57,8 @@ const Login = () => {
               <label className="label">
                 <span className="label-text font-bold">Email</span>
               </label>
-              <input
+              <input 
+                   
                 type="email"
                 name="email"
                 placeholder="email"
@@ -84,7 +85,7 @@ const Login = () => {
               )}
               <label className="label">
                 <Link
-                  to="/forgetPassword"
+                  to="/auth/login"
                   className="label-text-alt text-sm link link-hover underline font-semibold "
                   state={{ email: email }}
                 >

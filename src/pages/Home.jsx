@@ -5,7 +5,7 @@ import MovieCard from "../components/MovieCard";
 
 const Home = () => {
   const movies = useLoaderData();
-
+  const [loading, setLoading] = useState(true);
   const [loadedMovies, setLoadedMovies] = useState(movies);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -21,7 +21,9 @@ const Home = () => {
         setLoadedMovies(featuredMovies);
       } catch (error) {
         console.error("Error fetching movies:", error);
-      }
+      }finally {
+        setLoading(false); 
+    }
     };
 
     fetchMovies();
@@ -46,6 +48,12 @@ const Home = () => {
           </button>
         </div>
 
+        {loading ? ( 
+                    <div className="text-center">
+                     <span className="loading loading-infinity loading-lg"></span>  
+                    </div>
+                ) : (
+       <>
         <Banner />
         
         {/* Featured Movies Section */}
@@ -62,6 +70,8 @@ const Home = () => {
             </Link>
           </div>
         </div>
+        </>
+                )}
       </div>
     </div>
   );

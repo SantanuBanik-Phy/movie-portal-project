@@ -10,6 +10,7 @@ import MovieDetailsPage from "../pages/MovieDetailsPage";
 import MyFavorites from "../pages/MyFavorites";
 import UpdateMovieForm from "../components/UpdatedMovieForm";
 import PrivateRoute from "./PrivateRoute";
+import ErrorPage from "../pages/ErrorPage";
 
 
 
@@ -75,10 +76,10 @@ const router = createBrowserRouter([
       },
     ],
   },
-//   {
-//     path: "*",
-//     element: <ErrorPage></ErrorPage>
-//   },
+  {
+    path: "*",
+    element: <ErrorPage></ErrorPage>
+  },
 ]);
 
 export default router;

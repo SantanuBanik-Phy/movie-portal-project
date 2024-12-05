@@ -5,18 +5,22 @@ import { AuthContext } from "../provider/AuthProvider";
 const MyFavorites = () => {
     const { user } = useContext(AuthContext); // Access logged-in user context
     const [favoriteMovies, setFavoriteMovies] = useState([]); // State to store favorite movies
+    const [loading, setLoading] = useState(true); // Add loading state
 
-    // Fetch favorite movies when the component loads
     useEffect(() => {
         const fetchFavoriteMovies = async () => {
             if (user) {
                 try {
-                    const response = await fetch(`http://localhost:3000/favorites?email=${user.email}`); // Fetch favorites by email
+                    const response = await fetch(`http://localhost:3000/favorites?email=${user.email}`);
                     const data = await response.json();
-                    setFavoriteMovies(data); // Update state with fetched data
+                    setFavoriteMovies(data);
                 } catch (error) {
                     console.error("Error fetching favorite movies:", error);
+                } finally {
+                    setLoading(false); 
                 }
+            } else {
+                setLoading(false); 
             }
         };
 
@@ -74,7 +78,11 @@ const MyFavorites = () => {
     return (
         <div className="container mx-auto p-6 my-12">
             <h1 className="text-4xl font-bold text-center mb-8">My Favorite Movies</h1>
-            {favoriteMovies.length === 0 ? (
+            {loading ? ( 
+                <div className="text-center">
+                    <span className="loading loading-infinity loading-lg"></span>
+                    </div>
+            ) : favoriteMovies.length === 0 ? (
                 <p className="text-center text-gray-500">No favorite movies found.</p>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
