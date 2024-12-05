@@ -15,7 +15,7 @@ const HomeLayout = () => {
           
       
      
-      <nav className="bg-slate-900 mb-12 md:py-4 py-8  ">
+      <nav className="bg-slate-900  md:py-4 py-8  ">
         <Navbar></Navbar>
       </nav>
       
