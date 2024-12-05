@@ -34,9 +34,8 @@ const AllMovies = () => {
             try {
                 const response = await fetch("http://localhost:3000/movies");
                 const mongoMovies = await response.json();
-                // Combine MongoDB movies with fake movies
-                const allMovies = [...fakeMovies, ...mongoMovies];
-                setMovies(allMovies);
+                
+                setMovies(mongoMovies);
             } catch (error) {
                 console.error("Error fetching movies:", error);
             } 

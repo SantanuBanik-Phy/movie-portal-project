@@ -36,7 +36,7 @@ const Navbar = () => {
                     {user &&  
                     <NavLink to="/my-favorites">My Favorites</NavLink>
                     }
-                    {user && <NavLink to="/update-movie/:id">Update Movie</NavLink>}
+                   
                     
                     {/* Add your extra public route here */}
               <NavLink to="/aboutUs">About Us</NavLink>
