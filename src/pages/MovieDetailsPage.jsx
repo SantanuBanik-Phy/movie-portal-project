@@ -95,7 +95,7 @@ const MovieDetailsPage = () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({...movie, userEmail: user.email, movieId: id }), // Include movieId
+                body: JSON.stringify({...movie, userEmail: user.email}), // Include movieId
             });
 
             if (response.ok) {
