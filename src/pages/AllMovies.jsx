@@ -26,6 +26,7 @@ const fakeMovies = [
 
 const AllMovies = () => {
     const [movies, setMovies] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
     
 
     useEffect(() => {
@@ -43,13 +44,26 @@ const AllMovies = () => {
 
         fetchMovies();
     }, []);
+     // Filter movies based on search term
+     const filteredMovies = movies.filter((movie) => {
+        return movie.title.toLowerCase().includes(searchTerm.toLowerCase());
+    });
 
     return (
         <div className="container mx-auto p-6 my-12">
             <h1 className="text-4xl font-bold text-center mb-8">All Movies</h1>
+            <div className="form-control mb-8">
+                <input
+                    type="text"
+                    placeholder="Search movies..."
+                    className="input input-bordered"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+            </div>
            
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {movies.map((movie) => (
+                    {filteredMovies.map((movie) => (
                         <MovieCard key={movie._id} movie={movie} />
                     ))}
                 </div>
