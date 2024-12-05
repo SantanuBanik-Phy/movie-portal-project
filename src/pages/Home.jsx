@@ -37,7 +37,7 @@ const Home = () => {
     <div className={isDarkMode ? "dark" : ""}>
       <div className="bg-white dark:bg-gray-900 text-black dark:text-white min-h-screen transition-colors">
         {/* Theme Toggle Button */}
-        <div className=" w-11/12 flex justify-end">
+        <div className=" py-1 pr-6 flex justify-end items-center">
           <button
             onClick={handleThemeToggle}
             className="btn   btn-outline dark:btn-primary"

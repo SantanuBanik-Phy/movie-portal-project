@@ -32,10 +32,10 @@ const Navbar = () => {
           
           
             
-            {user && <NavLink to="/add-movie">Add Movie</NavLink>}
-                    {user &&  
+                  <NavLink to="/add-movie">Add Movie</NavLink>
+                    
                     <NavLink to="/my-favorites">My Favorites</NavLink>
-                    }
+                    
                    
                     
                     {/* Add your extra public route here */}

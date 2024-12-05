@@ -9,6 +9,7 @@ import AllMovies from "../pages/AllMovies";
 import MovieDetailsPage from "../pages/MovieDetailsPage";
 import MyFavorites from "../pages/MyFavorites";
 import UpdateMovieForm from "../components/UpdatedMovieForm";
+import PrivateRoute from "./PrivateRoute";
 
 
 
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
       },
       {
         path:"/add-movie",
-        element: <AddMovie />
+        element:<PrivateRoute><AddMovie /></PrivateRoute> 
     },
     {
       path: "/all-movies",
@@ -39,16 +40,16 @@ const router = createBrowserRouter([
     },
     {   
     path: "/movie-details/:id",
-    element: <MovieDetailsPage />,
+    element: <PrivateRoute><MovieDetailsPage /></PrivateRoute> 
    
     },
     {
       path: "/my-favorites",
-      element: <MyFavorites />
+      element: <PrivateRoute><MyFavorites /></PrivateRoute> 
   },
   {
     path: "/update-movie/:id", 
-    element: <UpdateMovieForm />,
+    element: <PrivateRoute><UpdateMovieForm /></PrivateRoute> 
     
 
 },
