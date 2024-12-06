@@ -48,7 +48,7 @@ const Login = () => {
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-50 to-blue-100 dark:from-gray-800 dark:to-gray-900">
       <ToastContainer position="top-center" />
-      <div className="flex flex-col justify-center items-center py-12">
+      <div className="flex flex-col justify-center items-center py-12 mx-4">
         <div className="text-center mb-10">
           <h1 className="text-5xl font-bold text-gray-700 dark:text-white">
             Welcome Back!
@@ -57,7 +57,7 @@ const Login = () => {
             Log in to your account to access amazing features.
           </p>
         </div>
-        <div className="card w-full rounded-xl max-w-xl shadow-xl bg-white dark:bg-gray-800  p-10">
+        <div className="card w-full rounded-xl max-w-xl shadow-xl bg-white dark:bg-gray-800  p-10 ">
           <form onSubmit={handleLogin}>
             {/* Email Field */}
             <div className="form-control mb-4">

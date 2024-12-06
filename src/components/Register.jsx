@@ -74,16 +74,16 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen  bg-gradient-to-br from-gray-100 to-blue-200 dark:from-gray-800 dark:to-gray-900 flex items-center justify-center">
+    <div className="min-h-screen   bg-gradient-to-br from-gray-100 to-blue-200 dark:from-gray-800 dark:to-gray-900 flex items-center justify-center">
       <ToastContainer position="top-center" />
-      <div className="w-full max-w-2xl px-6 m-12 ">
+      <div className="w-full  md:max-w-2xl md:px-6 my-12 mx-4 ">
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-gray-200">
             Register Now!
           </h1>
         </div>
-        <div className="card bg-white dark:bg-gray-800 shadow-xl rounded-xl">
-          <form onSubmit={handleRegister} className="card-body">
+        <div className="card bg-white dark:bg-gray-800 shadow-xl rounded-xl ">
+          <form onSubmit={handleRegister} className="card-body ">
             {/* Name Field */}
             <div className="form-control mb-4">
               <label className="label">
