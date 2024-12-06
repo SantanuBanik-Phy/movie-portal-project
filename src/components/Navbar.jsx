@@ -66,7 +66,7 @@ const Navbar = () => {
         </div>
 
         {/* User Section */}
-        <div className="navbar-end space-x-6">
+        <div className="ml-8 md:ml-0 navbar-end space-x-6">
           {/* User Profile or Login/Register */}
           {user && user?.email ? (
             <div className="flex items-center space-x-4">
@@ -108,7 +108,7 @@ const Navbar = () => {
             <label tabIndex={0} className="btn btn-square btn-ghost">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 text-yellow-500"
+                className="h-6 w-6 ml-4 text-yellow-500"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

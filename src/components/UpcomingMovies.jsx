@@ -46,7 +46,7 @@ const UpcomingMovies = ({ isDarkMode }) => {
                     <SwiperSlide key={index}>
                         <div className={`card shadow-2xl transition-transform transform hover:scale-105 p-6 rounded-xl ${bgColorClass}`}>
                             {/* Image Section */}
-                            <figure className="h-[550px] rounded-xl overflow-hidden shadow-lg">
+                            <figure className=" h-[450px]md:h-[550px] rounded-xl overflow-hidden shadow-lg">
                                 <img
                                     src={movie.image}
                                     alt={movie.title}
