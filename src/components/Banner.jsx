@@ -54,8 +54,8 @@ const Banner = () => {
             <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-center px-4">
               <h2 className="md:text-5xl text-4xl font-bold mb-2">{slide.title}</h2>
               <p className="mb-4">{slide.description}</p>
-              <NavLink to="/aboutUs">
-                <button className="btn bg-green-500 rounded-xl">About Us</button>
+              <NavLink to="/about">
+                <button className="btn  bg-gradient-to-r from-[#0B98AC] to-[#A8EB12] rounded-xl">About Us</button>
               </NavLink>
             </div>
           </div>

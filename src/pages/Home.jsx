@@ -67,7 +67,7 @@ const Home = () => {
             ))}
           </div>
           <div className="text-center mt-8">
-            <Link to="/all-movies" className="btn btn-primary">
+            <Link to="/all-movies" className="btn font-semibold text-white bg-gradient-to-l from-[#0B98AC] to-[#8ec90d] rounded-xl">
               See All Movies
             </Link>
           </div>
@@ -77,13 +77,13 @@ const Home = () => {
 
                 <div className="container mx-auto ">
                 <h2 className="text-4xl font-bold ml-24 ">Upcoming Movies</h2>
-               <UpcomingMovies></UpcomingMovies>
+               <UpcomingMovies isDarkMode={isDarkMode}></UpcomingMovies>
             </div>
 
             {/* Extra Section 2 - Example: Movie News */}
             <div className="container mx-auto ">
                 <h2 className="text-3xl font-bold text-center mb-8">Latest Movie News</h2>
-               <MovieNews></MovieNews>
+               <MovieNews isDarkMode={isDarkMode}></MovieNews>
             </div>
       </div>
     </div>

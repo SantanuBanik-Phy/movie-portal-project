@@ -11,6 +11,7 @@ import MyFavorites from "../pages/MyFavorites";
 import UpdateMovieForm from "../components/UpdatedMovieForm";
 import PrivateRoute from "./PrivateRoute";
 import ErrorPage from "../pages/ErrorPage";
+import AboutUs from "../pages/AboutUs";
 
 
 
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
     
 
 },
+{
+  path: "/about",
+  element: <AboutUs></AboutUs>
+}
    
     ],
   },

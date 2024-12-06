@@ -25,13 +25,14 @@ const upcomingMoviesData = [
         description: "A unique and moving love story between a mute woman and an amphibious creature held captive in a high-security government laboratory.",
         trailerLink: "https://www.youtube.com/watch?v=XFYWazblaUA",
     },
-    // ... more upcoming movie data
 ];
-const UpcomingMovies = () => {
-    return (
-        <div className="container mx-auto px-10 md:px-20 my-12">
-          
 
+const UpcomingMovies = ({ isDarkMode }) => {
+    const textColorClass = isDarkMode ? "text-white" : "text-black";
+    const bgColorClass = isDarkMode ? "bg-gray-800" : "bg-white";
+
+    return (
+        <div className={`container max-w-6xl mx-auto px-2 my-12 ${bgColorClass}`}>
             <Swiper
                 modules={[Navigation, Autoplay, EffectFade]}
                 spaceBetween={50}
@@ -44,7 +45,8 @@ const UpcomingMovies = () => {
             >
                 {upcomingMoviesData.map((movie, index) => (
                     <SwiperSlide key={index}>
-                        <div className="card bg-base-100 shadow-xl p-6 rounded-none">
+                        <div className={`card shadow-xl p-6 rounded-none ${bgColorClass}`}>
+                            {/* Image Section */}
                             <figure className="h-96">
                                 <img
                                     src={movie.image}
@@ -52,14 +54,20 @@ const UpcomingMovies = () => {
                                     className="w-full h-full object-cover"
                                 />
                             </figure>
+
+                            {/* Content Section */}
                             <div className="card-body">
-                                <h2 className="text-3xl font-bold mb-4 text-black">{movie.title}</h2>
-                                <p className="  text-black">{movie.description}</p>
+                                <h2 className={`text-3xl font-bold mb-4 ${textColorClass}`}>
+                                    {movie.title}
+                                </h2>
+                                <p className={`text-base mb-4 ${textColorClass}`}>
+                                    {movie.description}
+                                </p>
                                 <a
                                     href={movie.trailerLink}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="btn btn-primary mt-4"
+                                    className="btn text-white bg-gradient-to-l from-[#0B98AC] to-[#8ec90d] mt-4"
                                 >
                                     Watch Trailer
                                 </a>

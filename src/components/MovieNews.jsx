@@ -21,16 +21,20 @@ const movieNewsData = [
     },
 ];
 
-const MovieNews = () => {
-    return (
-        <div className="container mx-auto p-6 my-12">
-            
+const MovieNews = ({ isDarkMode }) => {
+    // Define dynamic classes based on isDarkMode
+    const textColorClass = isDarkMode ? "text-white" : "text-black";
+    const bgColorClass = isDarkMode ? "bg-gray-800" : "bg-white";
+    const cardTextColorClass = isDarkMode ? "text-gray-300" : "text-gray-600";
 
+    return (
+        <div className={`container mx-auto p-10 ${bgColorClass} ${textColorClass}`}>
+           
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {movieNewsData.map((news, index) => (
                     <div
                         key={index}
-                        className="relative overflow-hidden transform transition-all duration-300 bg-white shadow-lg hover:scale-105 rounded-lg "
+                        className={`relative overflow-hidden transform transition-all duration-300 shadow-lg hover:scale-105 rounded-lg ${bgColorClass}`}
                     >
                         {/* Image Section */}
                         <div className="relative group">
@@ -53,11 +57,13 @@ const MovieNews = () => {
 
                         {/* Content Section */}
                         <div className="p-4 flex flex-col justify-between">
-                            <h2 className="text-xl font-semibold text-gray-800">{news.title}</h2>
-                            <p className="text-gray-600 text-sm mt-2 line-clamp-3">{news.description}</p>
+                            <h2 className={`text-xl font-semibold mb-2 ${textColorClass}`}>
+                                {news.title}
+                            </h2>
+                            <p className={`text-sm line-clamp-3 ${cardTextColorClass}`}>
+                                {news.description}
+                            </p>
                         </div>
-
-                       
                     </div>
                 ))}
             </div>
