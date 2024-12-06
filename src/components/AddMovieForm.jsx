@@ -37,7 +37,7 @@ const AddMovieForm = () => {
         data.rating = rating;
 
         try {
-            const response = await fetch("http://localhost:3000/movies", {
+            const response = await fetch("https://b10-a10-server-site.vercel.app/movies", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -17,7 +17,7 @@ const Navbar = () => {
         {/* Logo and Brand */}
         <div className="navbar-start">
           <Link to="/">
-            <span className="text-3xl font-bold text-white tracking-wider transition-all duration-300 hover:text-yellow-400">
+            <span className="text-3xl  font-bold text-white tracking-wider transition-all duration-300 hover:text-yellow-400">
               Movie <span className="text-yellow-400">Por</span>tal
             </span>
           </Link>

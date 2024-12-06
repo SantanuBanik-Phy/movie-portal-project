@@ -7,7 +7,7 @@ import Footer from '../components/Footer';
 const AuthLayout = () => {
     return (
         <div className='bg-[#F3f3f3]'>
-            <header className='bg-slate-900 mb-12 py-4 '>
+            <header >
                 <Navbar></Navbar>
             </header>
           

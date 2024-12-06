@@ -12,7 +12,7 @@ const MyFavorites = () => {
         const fetchFavoriteMovies = async () => {
             if (user) {
                 try {
-                    const response = await fetch(`http://localhost:3000/favorites?email=${user.email}`);
+                    const response = await fetch(`https://b10-a10-server-site.vercel.app/favorites?email=${user.email}`);
                     const data = await response.json();
                     setFavoriteMovies(data);
                 } catch (error) {
@@ -41,7 +41,7 @@ const MyFavorites = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const response = await fetch(`http://localhost:3000/favorites?email=${user.email}`, {
+                    const response = await fetch(`https://b10-a10-server-site.vercel.app/favorites?email=${user.email}`, {
                         method: "DELETE",
                     });
 

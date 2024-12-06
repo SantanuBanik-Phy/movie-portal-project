@@ -10,7 +10,7 @@ const AllMovies = () => {
     useEffect(() => {
         const fetchMovies = async () => {
             try {
-                const response = await fetch("http://localhost:3000/movies");
+                const response = await fetch("https://b10-a10-server-site.vercel.app/movies");
                 const mongoMovies = await response.json();
                 setMovies(mongoMovies);
             } catch (error) {

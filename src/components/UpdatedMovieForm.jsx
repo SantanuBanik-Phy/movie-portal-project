@@ -15,7 +15,7 @@ const UpdateMovieForm = () => {
     useEffect(() => {
         const fetchMovie = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/movies/${id}`);
+                const response = await fetch(`https://b10-a10-server-site.vercel.app/movies/${id}`);
                 const movieData = await response.json();
 
                 // Set default values for the form fields
@@ -49,7 +49,7 @@ const UpdateMovieForm = () => {
         data.rating = rating;
 
         try {
-            const response = await fetch(`http://localhost:3000/movies/${id}`, {
+            const response = await fetch(`https://b10-a10-server-site.vercel.app/movies/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

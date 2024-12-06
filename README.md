@@ -2,7 +2,7 @@
 
 This is a user-friendly movie portal built with React that allows users to explore movies, view details, add movies, delete movies, and manage their favorite movies.
 
-**Live Site URL:** [Insert your live site URL here]
+**Live Site URL:** [https://rambunctious-plantation.surge.sh/](https://rambunctious-plantation.surge.sh/)
 
 ## Features
 

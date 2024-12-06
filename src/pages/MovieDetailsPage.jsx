@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../provider/AuthProvider";
+import { Helmet } from "react-helmet";
 
 const MovieDetailsPage = () => {
     const { user } = useContext(AuthContext);
@@ -14,12 +15,12 @@ const MovieDetailsPage = () => {
     useEffect(() => {
         const fetchMovieDetails = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/movies/${id}`);
+                const response = await fetch(`https://b10-a10-server-site.vercel.app/movies/${id}`);
                 const data = await response.json();
                 setMovie(data);
 
                 if (user) {
-                    const favoritesResponse = await fetch(`http://localhost:3000/favorites?email=${user.email}&movieId=${id}`);
+                    const favoritesResponse = await fetch(`https://b10-a10-server-site.vercel.app/favorites?email=${user.email}&movieId=${id}`);
                     const favoritesData = await favoritesResponse.json();
                     setIsFavorite(favoritesData.length > 0);
                 }
@@ -51,7 +52,7 @@ const MovieDetailsPage = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const response = await fetch(`http://localhost:3000/movies/${_id}`, { method: "DELETE" });
+                    const response = await fetch(`https://b10-a10-server-site.vercel.app/movies/${_id}`, { method: "DELETE" });
                     const data = await response.json();
 
                     if (data.deletedCount > 0) {
@@ -87,7 +88,7 @@ const MovieDetailsPage = () => {
         }
 
         try {
-            const response = await fetch("http://localhost:3000/favorites", {
+            const response = await fetch("https://b10-a10-server-site.vercel.app/favorites", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ ...movie, userEmail: user.email }),
@@ -179,6 +180,11 @@ const MovieDetailsPage = () => {
                     </div>
                 </div>
             </div>
+            <Helmet>
+                <title>{movie.title} | Movie Details</title>
+                
+   
+         </Helmet>
         </div>
     );
 };
