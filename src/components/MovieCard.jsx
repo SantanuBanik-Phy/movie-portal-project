@@ -34,7 +34,7 @@ const MovieCard = ({ movie, isDarkMode }) => {
                 <div className="text-right">
                     <Link
                         to={`/movie-details/${movie._id}`}
-                        className="inline-block px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-green-400 to-blue-500 rounded-lg shadow-md hover:from-green-500 hover:to-blue-600 transition-colors"
+                        className="inline-block px-4 py-2 text-sm font-semibold rounded-xl text-white bg-gradient-to-r from-[#19284a] to-[#619bca] transition-colors"
                     >
                         See Details
                     </Link>

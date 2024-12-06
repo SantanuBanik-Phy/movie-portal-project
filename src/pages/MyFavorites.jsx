@@ -98,7 +98,7 @@ const MyFavorites = () => {
                                 className="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-300"
                             />
                             <div className="p-6">
-                                <h2 className="text-2xl font-semibold text-teal-600 mb-2">
+                                <h2 className="text-2xl font-bold text-blue-900 mb-2">
                                     {movie.title}
                                 </h2>
                                 <div className="text-sm text-gray-500 mb-4">

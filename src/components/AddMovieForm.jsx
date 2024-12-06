@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 const AddMovieForm = () => {
     const { user } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -96,7 +97,7 @@ const AddMovieForm = () => {
                                 message: "Invalid URL",
                             },
                         })}
-                        className="w-full input input-bordered focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                        className="w-full input input-bordered focus:ring-2 focus:ring-blue-900 focus:outline-none"
                     />
                 </div>
 
@@ -114,7 +115,7 @@ const AddMovieForm = () => {
                                 message: "Title must be at least 2 characters long",
                             },
                         })}
-                        className="w-full input input-bordered focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                        className="w-full input input-bordered focus:ring-2 focus:ring-blue-900 focus:outline-none"
                     />
                 </div>
 
@@ -125,7 +126,7 @@ const AddMovieForm = () => {
                     </label>
                     <select
                         {...register("genre", { required: "Please select a genre" })}
-                        className="w-full select select-bordered focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                        className="w-full select select-bordered focus:ring-2 focus:ring-blue-900 focus:outline-none"
                     >
                         <option value="">Select Genre</option>
                         <option value="comedy">Comedy</option>
@@ -134,7 +135,7 @@ const AddMovieForm = () => {
                         <option value="romance">Romance</option>
                         <option value="action">Action</option>
                         <option value="history">History</option>
-                        <option value="science fiction">Science Fiction</option>
+                        <option value="science fiction">Sci-Fi</option>
                         <option value="animation">Animation</option>
                     </select>
                 </div>
@@ -150,7 +151,7 @@ const AddMovieForm = () => {
                             required: "Duration is required",
                             min: { value: 60, message: "Duration must be at least 60 minutes" },
                         })}
-                        className="w-full input input-bordered focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                        className="w-full input input-bordered focus:ring-2 focus:ring-blue-900 focus:outline-none"
                     />
                 </div>
 
@@ -161,7 +162,7 @@ const AddMovieForm = () => {
                     </label>
                     <select
                         {...register("releaseYear", { required: "Please select a release year" })}
-                        className="w-full select select-bordered focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                        className="w-full select select-bordered focus:ring-2 focus:ring-blue-900 focus:outline-none"
                     >
                         <option value="">Select Year</option>
                         <option value="2024">2024</option>
@@ -170,6 +171,12 @@ const AddMovieForm = () => {
                         <option value="2021">2021</option>
                         <option value="2020">2020</option>
                         <option value="2019">2019</option>
+                        <option value="2024">2018</option>
+                        <option value="2023">2017</option>
+                        <option value="2022">2016</option>
+                        <option value="2021">2015</option>
+                        <option value="2020">2014</option>
+                        <option value="2019">2012</option>
                     </select>
                 </div>
 
@@ -178,14 +185,17 @@ const AddMovieForm = () => {
                     <label className="block font-medium text-gray-700 mb-2">
                         Rating
                     </label>
+                    <div className="" >
                     <Rating
                         onClick={handleStarClick}
                         ratingValue={rating}
                         initialValue={0}
                         size={30}
                         transition={true}
-                        className="flex justify-start"
+                       
+                       
                     />
+                    </div>
                 </div>
 
                 {/* Summary */}
@@ -198,14 +208,14 @@ const AddMovieForm = () => {
                             required: "Summary is required",
                             minLength: { value: 10, message: "Summary must be at least 10 characters long" },
                         })}
-                        className="w-full textarea textarea-bordered h-24 focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                        className="w-full textarea textarea-bordered h-24 focus:ring-2 focus:ring-blue-900 focus:outline-none"
                     />
                 </div>
 
                 <div>
                     <button
                         type="submit"
-                        className="w-full py-3 bg-gradient-to-r from-teal-400 to-green-500 text-white font-bold rounded-lg shadow-lg hover:from-teal-500 hover:to-green-600 transition-transform transform hover:scale-105"
+                        className="w-full py-3 bg-gradient-to-r from-[#19284a] to-[#619bca] text-white font-bold rounded-lg shadow-lg hover:from-teal-500 hover:to-green-600 transition-transform transform hover:scale-105"
                     >
                         Add Movie
                     </button>

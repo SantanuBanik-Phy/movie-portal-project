@@ -13,6 +13,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.1",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@tailwindcss/line-clamp": "^0.4.4",
+    "animate.css": "^4.1.1",
     "firebase": "^11.0.2",
     "framer-motion": "^11.13.1",
     "localforage": "^1.10.0",

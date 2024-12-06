@@ -172,7 +172,7 @@ const MovieDetailsPage = () => {
                         </button>
                         <Link
                             to={`/update-movie/${movie._id}`}
-                            className="block w-full py-2 px-4 bg-gradient-to-r from-blue-500 to-green-400 text-white text-center rounded-lg shadow-md hover:from-blue-600 hover:to-green-500 transition duration-200"
+                            className="block w-full py-2 px-4 bg-gradient-to-r from-[#19284a] to-[#619bca] text-white text-center rounded-lg shadow-md hover:from-blue-600 hover:to-green-500 transition duration-200"
                         >
                             Update Movie
                         </Link>

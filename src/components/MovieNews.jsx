@@ -4,19 +4,19 @@ const movieNewsData = [
     {
         title: "Avatar: The Way of Water Makes a Splash with $134 Million Debut",
         description: "James Cameron's long-awaited sequel makes a big splash at the box office, exceeding expectations.",
-        image: "https://www.hollywoodreporter.com/wp-content/uploads/2022/12/Avatar-The-Way-of-Water-Poster-H-2022.jpg?w=1024",
+        image: "https://i.ibb.co.com/9wwX0Y2/avatar.webp",
         link: "https://www.hollywoodreporter.com/movies/movie-news/avatar-the-way-of-water-box-office-opening-weekend-1235281345/",
     },
     {
         title: "The Batman: Is it a Box-Office Hit?",
         description: "Matt Reeves' dark and gritty take on the Caped Crusader breaks records and impresses critics.",
-        image: "https://www.hollywoodreporter.com/wp-content/uploads/2022/03/The-Batman-Poster-H-2022.jpg?w=1024",
+        image: "https://i.ibb.co.com/hsJjpG8/the-batman-title-poster-j2ft6omd0csyg22b.jpg",
         link: "https://www.hollywoodreporter.com/movies/movie-news/the-batman-box-office-milestone-1235112645/",
     },
     {
         title: "No Time to Die: Is it a Box-Office Success?",
         description: "Daniel Craig's final outing as James Bond faces challenges but ultimately delivers a satisfying conclusion.",
-        image: "https://www.hollywoodreporter.com/wp-content/uploads/2021/08/No-Time-to-Die-Poster-H-2021.jpg?w=1024",
+        image: "https://i.ibb.co.com/Pw8GbRp/1196813.jpg",
         link: "https://www.hollywoodreporter.com/movies/movie-news/no-time-to-die-box-office-projections-1235018846/",
     },
 ];
@@ -28,7 +28,7 @@ const MovieNews = ({ isDarkMode }) => {
     const cardTextColorClass = isDarkMode ? "text-gray-300" : "text-gray-600";
 
     return (
-        <div className={`container mx-auto p-10 ${bgColorClass} ${textColorClass}`}>
+        <div className={`container mx-auto p-10  ${textColorClass}`}>
            
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {movieNewsData.map((news, index) => (
@@ -48,7 +48,7 @@ const MovieNews = ({ isDarkMode }) => {
                                     href={news.link}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-white text-lg font-bold underline"
+                                    className="text-yellow-400 text-lg font-bold underline"
                                 >
                                     Read More
                                 </a>

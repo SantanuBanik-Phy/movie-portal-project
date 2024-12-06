@@ -107,7 +107,7 @@ const UpdateMovieForm = () => {
                                 message: "Invalid URL",
                             },
                         })}
-                        className="w-full input input-bordered focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                        className="w-full input input-bordered focus:ring-2 focus:ring-blue-900 focus:outline-none"
                     />
                 </div>
 
@@ -125,7 +125,7 @@ const UpdateMovieForm = () => {
                                 message: "Title must be at least 2 characters long",
                             },
                         })}
-                        className="w-full input input-bordered focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                        className="w-full input input-bordered focus:ring-2 focus:ring-blue-900 focus:outline-none"
                     />
                 </div>
 
@@ -136,7 +136,7 @@ const UpdateMovieForm = () => {
                     </label>
                     <select
                         {...register("genre", { required: "Please select a genre" })}
-                        className="w-full select select-bordered focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                        className="w-full select select-bordered focus:ring-2 focus:ring-blue-900 focus:outline-none"
                     >
                         <option value="">Select Genre</option>
                         <option value="comedy">Comedy</option>
@@ -161,7 +161,7 @@ const UpdateMovieForm = () => {
                             required: "Duration is required",
                             min: { value: 60, message: "Duration must be at least 60 minutes" },
                         })}
-                        className="w-full input input-bordered focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                        className="w-full input input-bordered focus:ring-2 focus:ring-blue-900 focus:outline-none"
                     />
                 </div>
 
@@ -172,15 +172,21 @@ const UpdateMovieForm = () => {
                     </label>
                     <select
                         {...register("releaseYear", { required: "Please select a release year" })}
-                        className="w-full select select-bordered focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                        className="w-full select select-bordered focus:ring-2 focus:ring-blue-900 focus:outline-none"
                     >
-                        <option value="">Select Year</option>
+                         <option value="">Select Year</option>
                         <option value="2024">2024</option>
                         <option value="2023">2023</option>
                         <option value="2022">2022</option>
                         <option value="2021">2021</option>
                         <option value="2020">2020</option>
                         <option value="2019">2019</option>
+                        <option value="2024">2018</option>
+                        <option value="2023">2017</option>
+                        <option value="2022">2016</option>
+                        <option value="2021">2015</option>
+                        <option value="2020">2014</option>
+                        <option value="2019">2012</option>
                     </select>
                 </div>
 
@@ -209,14 +215,14 @@ const UpdateMovieForm = () => {
                             required: "Summary is required",
                             minLength: { value: 10, message: "Summary must be at least 10 characters long" },
                         })}
-                        className="w-full textarea textarea-bordered h-24 focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                        className="w-full textarea textarea-bordered h-24 focus:ring-2 focus:ring-blue-900 focus:outline-none"
                     />
                 </div>
 
                 <div>
                     <button
                         type="submit"
-                        className="w-full py-3 bg-gradient-to-r from-teal-400 to-green-500 text-white font-bold rounded-lg shadow-lg hover:from-teal-500 hover:to-green-600 transition-transform transform hover:scale-105"
+                        className="w-full py-3 bg-gradient-to-r from-[#19284a] to-[#619bca] text-white font-bold rounded-lg shadow-lg hover:from-teal-500 hover:to-green-600 transition-transform transform hover:scale-105"
                     >
                         Update Movie
                     </button>

@@ -1,36 +1,36 @@
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
-import { NavLink } from "react-router-dom";
+import 'animate.css';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import styles for the carousel
 
 const Banner = () => {
-  const slides = [
+  const slides =[
     {
-      id: 1,
-      image: "https://example.com/images/movie1.jpg",
-      title: "The Eternal Quest",
-      description: "An epic adventure into a magical world where secrets and ancient powers await the brave explorers."
+      "id": 1,
+      "image": "https://i.ibb.co.com/nn6vvXX/wallpapersden-com-oppenheimer-official-5k-poster-5120x2858.jpg",
+      "title": "Oppenheimer",
+      "description": "The story of J. Robert Oppenheimer, the scientist who led the development of the atomic bomb during World War II, grappling with the moral consequences of his work."
     },
     {
-      id: 2,
-      image: "https://example.com/images/movie2.jpg",
-      title: "Shadows of the Past",
-      description: "A thrilling mystery that takes you into the depths of a detective's troubled past."
+      "id": 2,
+      "image": "https://i.ibb.co.com/7g1qsKm/Interstellar.jpg",
+      "title": "Interstellar",
+      "description": "A group of astronauts travels through a wormhole near Saturn in search of a new home for humanity, encountering unimaginable challenges in space and time."
     },
     {
-      id: 3,
-      image: "https://example.com/images/movie3.jpg",
-      title: "Love in the Digital Age",
-      description: "A heartwarming drama about love, heartbreak, and technology's role in modern relationships."
+      "id": 3,
+      "image": "https://i.ibb.co.com/2cddqfy/avengersendgame-lob-mas-mob-01.jpg",
+      "title": "Avengers: Endgame",
+      "description": "The Avengers assemble one final time to undo the catastrophic damage caused by Thanos, risking everything in an epic battle to save the universe."
     },
     {
-      id: 4,
-      image: "https://example.com/images/movie4.jpg",
-      title: "The Last Outpost",
-      description: "An action-packed battle for humanity's survival against an alien invasion at the edge of the galaxy."
-    },
+      "id": 4,
+      "image": "https://i.ibb.co.com/5jRgnJz/original.jpg",
+      "title": "Titanic",
+      "description": "A young couple from different social backgrounds fall in love aboard the doomed RMS Titanic, as they face the tragic sinking of the ship during its maiden voyage."
+    }
+  ]
   
-  ];
 
   return (
     <div className="bg-neutral text-neutral-content">
@@ -49,14 +49,12 @@ const Banner = () => {
             <img
               src={slide.image}
               alt={slide.title}
-              className="w-full h-[500px] object-cover"
+              className="w-full h-[450px] md:h-[600px] object-cover"
             />
             <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-center px-4">
-              <h2 className="md:text-5xl text-4xl font-bold mb-2">{slide.title}</h2>
-              <p className="mb-4">{slide.description}</p>
-              <NavLink to="/about">
-                <button className="btn  bg-gradient-to-r from-[#0B98AC] to-[#A8EB12] rounded-xl">About Us</button>
-              </NavLink>
+              <h2 className="md:text-5xl text-4xl text-yellow-500  font-bold mb-2 animate__animated animate__slideInDown">{slide.title}</h2>
+              <p className="mb-4 animate__animated animate__slideInUp">{slide.description}</p>
+             
             </div>
           </div>
         ))}

@@ -1,22 +1,22 @@
-// import logo from "../assets/sign.png";
+import logo from "../assets/logo.png";
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="p-10   bg-slate-900 text-white">
+        <footer className="p-10   bg-gradient-to-r from-[#122146] to-[#2f5373] text-white">
             <div className="container mx-auto ">
                 {/* Main Footer Content */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 py-10">
                     {/* Company Information */}
                     <div className="space-y-4">
                         <img
-                            src=""
+                            src={logo}
                             alt="Company Logo"
                             className="w-16 h-16 mx-auto lg:mx-0"
                         />
                         <h1 className="text-2xl font-bold text-center lg:text-left">
-                        Movie Portal
+                        Movie <span className="text-yellow-400">Por</span>tal
                         </h1>
                         <p className="text-sm text-gray-300 text-center lg:text-left">
                         Movie Site management company
@@ -250,7 +250,7 @@ data-tip="GitHub"
                             <li className="flex gap-2 items-start">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="w-6 h-6 text-green-500"
+                                    className="w-6 h-6 text-yellow-500"
                                     fill="currentColor"
                                     viewBox="0 0 24 24"
                                 >
@@ -262,7 +262,7 @@ data-tip="GitHub"
                             <li className="flex gap-2 items-start">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="w-6 h-6 text-green-500"
+                                    className="w-6 h-6 text-yellow-500"
                                     fill="currentColor"
                                     viewBox="0 0 24 24"
                                 >
@@ -273,7 +273,7 @@ data-tip="GitHub"
                             <li className="flex gap-2 items-start">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="w-6 h-6 text-green-500"
+                                    className="w-6 h-6 text-yellow-500"
                                     fill="currentColor"
                                     viewBox="0 0 24 24"
                                 >

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-// Update with your actual logo path
+import logo from "../assets/logo.png";
 
 const AboutUs = () => {
     // Animation Variants
@@ -31,25 +31,25 @@ const AboutUs = () => {
             {/* Hero Section */}
             <motion.div
                 variants={fadeInUp}
-                className="hero bg-gradient-to-r from-[#0B98AC] to-[#A8EB12] rounded-xl text-white shadow-xl mb-12"
+                className="hero bg-gradient-to-r from-[#17264b] to-[#456f94] rounded-xl text-white shadow-xl mb-12"
             >
-                <div className="hero-content flex-col lg:flex-row items-center">
+                <div className="hero-content p-8 flex-col lg:flex-row items-center">
                     <motion.img
-                        src=''
-                        className="max-w-sm rounded-lg shadow-2xl transition-transform duration-500 hover:scale-105"
+                        src={logo}
+                        className="max-w-xs pl-6 rounded-lg shadow-2xl transition-transform duration-500 hover:scale-105"
                         alt="Movie Portal Logo"
                         whileHover={{ scale: 1.1 }}
                         transition={{ duration: 0.3 }}
                     />
                     <div className="lg:ml-8 p-4 text-center lg:text-left">
-                        <h1 className="text-4xl font-extrabold mb-4">About Movie Portal</h1>
+                        <h1 className="text-4xl font-bold  text-yellow-500 mb-4">About Movie Portal</h1>
                         <p className="text-lg leading-relaxed mb-4">
                             Your one-stop destination for everything movies! From timeless classics to the latest blockbusters, 
                             we are dedicated to bringing you an unmatched movie experience.
                         </p>
                         <motion.a
                             href="#contact"
-                            className="btn btn-outline btn-light hover:bg-white hover:text-blue-500 mt-4 transition-all duration-300"
+                            className="btn btn-outline btn-light bg-white hover:text-blue-500 mt-4 transition-all duration-300"
                             whileHover={{ scale: 1.1 }}
                         >
                             Get in Touch
@@ -60,7 +60,7 @@ const AboutUs = () => {
 
             {/* Our Mission */}
             <motion.div variants={fadeInUp} className="bg-gray-100 rounded-xl shadow-lg p-8 mb-12">
-                <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Our Mission</h2>
+                <h2 className="text-3xl font-bold text-center text-yellow-500 mb-6">Our Mission</h2>
                 <p className="text-lg text-gray-700 text-center leading-relaxed">
                     At Movie Portal, we're passionate about film and committed to delivering a seamless and enjoyable experience 
                     for movie enthusiasts like you. Whether you're diving into the classics or exploring the latest releases, 
@@ -70,7 +70,7 @@ const AboutUs = () => {
 
             {/* Our Values */}
             <motion.div variants={fadeInUp} className="mb-12">
-                <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Our Values</h2>
+                <h2 className="text-3xl font-bold text-center  text-yellow-500 mb-6">Our Values</h2>
                 <motion.div
                     variants={staggerContainer}
                     className="grid grid-cols-1 md:grid-cols-3 gap-8"
@@ -84,7 +84,7 @@ const AboutUs = () => {
                         >
                             <div className="card-body text-center">
                                 <div className="mb-4">
-                                    <i className={`text-green-500 text-4xl ${
+                                    <i className={`text-blue-900 text-4xl ${
                                         index === 0
                                             ? "fas fa-film"
                                             : index === 1
@@ -110,17 +110,17 @@ const AboutUs = () => {
             <motion.div
                 variants={fadeInUp}
                 id="contact"
-                className="bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-xl shadow-lg p-8"
+                className="bg-gradient-to-l from-[#17264b] to-[#456f94]  text-white rounded-xl shadow-lg p-8"
             >
-                <h2 className="text-3xl font-bold text-center mb-6">Contact Us</h2>
+                <h2 className="text-3xl font-bold text-center  text-yellow-500 mb-6">Contact Us</h2>
                 <motion.div
                     variants={staggerContainer}
                     className="grid grid-cols-1 md:grid-cols-3 gap-8"
                 >
                     {[
                         { title: "Email", content: "support@movieportal.com", type: "email" },
-                        { title: "Phone", content: "+1 (555) 555-5555", type: "phone" },
-                        { title: "Address", content: "123 Movie Lane, Film City, CA 91234", type: "address" },
+                        { title: "Phone", content: "+880182398472", type: "phone" },
+                        { title: "Address", content: " 296/1,South Shadebpur,Feni,Dhaka,Bangladesh", type: "address" },
                     ].map((contact, index) => (
                         <motion.div
                             key={index}

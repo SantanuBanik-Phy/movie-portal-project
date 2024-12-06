@@ -44,7 +44,7 @@ const Home = () => {
         <div className=" py-1 pr-6 flex justify-end items-center">
           <button
             onClick={handleThemeToggle}
-            className="btn   btn-outline dark:btn-primary"
+            className="btn   btn-outline"
           >
             {isDarkMode ? <i className="fa-solid fa-sun text-2xl text-white"></i> : <i className="fa-solid fa-moon text-3xl"></i>}
           </button>
@@ -60,14 +60,14 @@ const Home = () => {
         
         {/* Featured Movies Section */}
         <div className="container mx-auto p-6 my-12">
-          <h2 className="text-3xl font-bold text-center mb-8">Featured Movies</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-yellow-500  text-center mb-8">Featured Movies</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {loadedMovies.map((movie) => (
               <MovieCard key={movie._id} movie={movie} isDarkMode={isDarkMode} />
             ))}
           </div>
           <div className="text-center mt-8">
-            <Link to="/all-movies" className="btn font-semibold text-white bg-gradient-to-l from-[#0B98AC] to-[#8ec90d] rounded-xl">
+            <Link to="/all-movies" className="btn font-semibold text-white bg-gradient-to-r from-[#19284a] to-[#619bca] rounded-xl">
               See All Movies
             </Link>
           </div>
@@ -76,13 +76,13 @@ const Home = () => {
                 )}
 
                 <div className="container mx-auto ">
-                <h2 className="text-4xl font-bold ml-24 ">Upcoming Movies</h2>
+                <h2 className=" text-3xl md:text-4xl font-bold ml-24 text-yellow-500 ">Upcoming Movies</h2>
                <UpcomingMovies isDarkMode={isDarkMode}></UpcomingMovies>
             </div>
 
             {/* Extra Section 2 - Example: Movie News */}
             <div className="container mx-auto ">
-                <h2 className="text-3xl font-bold text-center mb-8">Latest Movie News</h2>
+                <h2 className="text-3xl md:text-4xl text-yellow-500  font-bold text-center mb-8">Latest Movie News</h2>
                <MovieNews isDarkMode={isDarkMode}></MovieNews>
             </div>
       </div>
