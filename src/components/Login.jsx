@@ -46,18 +46,18 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-50 to-blue-100 dark:from-gray-800 dark:to-gray-900">
+    <div className="min-h-screen bg-gradient-to-r from-blue-50 to-blue-100 ">
       <ToastContainer position="top-center" />
       <div className="flex flex-col justify-center items-center py-12 mx-4">
         <div className="text-center mb-10">
-          <h1 className="text-5xl font-bold text-gray-700 dark:text-white">
+          <h1 className="text-5xl font-bold text-gray-700 ">
             Welcome Back!
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-2">
+          <p className="text-gray-600  mt-2">
             Log in to your account to access amazing features.
           </p>
         </div>
-        <div className="card w-full rounded-xl max-w-xl shadow-xl bg-white dark:bg-gray-800  p-10 ">
+        <div className="card w-full rounded-xl max-w-xl shadow-xl bg-white  p-10 ">
           <form onSubmit={handleLogin}>
             {/* Email Field */}
             <div className="form-control mb-4">
@@ -69,7 +69,7 @@ const Login = () => {
                   type="email"
                   name="email"
                   placeholder="Enter your email"
-                  className="input input-bordered pl-12 w-full dark:bg-gray-700 dark:text-gray-200"
+                  className="input input-bordered pl-12 w-full "
                   required
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -96,14 +96,14 @@ const Login = () => {
            
             <div className="form-control mb-4">
               <label className="label">
-                <span className="label-text font-semibold text-gray-600 dark:text-gray-300">Password</span>
+                <span className="label-text font-semibold text-gray-600 ">Password</span>
               </label>
               <div className="relative">
                 <input
                   type="password"
                   name="password"
                   placeholder="Enter your password"
-                  className="input input-bordered pl-12 w-full dark:bg-gray-700 dark:text-gray-200"
+                  className="input input-bordered pl-12 w-full "
                   required
                 />
                 <span className="absolute left-3 top-3.5 text-gray-400">
@@ -132,7 +132,7 @@ const Login = () => {
               <label className="label">
                 <Link
                   to="/auth/login"
-                  className="label-text-alt text-sm link link-hover underline font-semibold text-blue-500 dark:text-blue-300"
+                  className="label-text-alt text-sm link link-hover underline font-semibold text-blue-500 "
                   state={{ email: email }}
                 >
                   Forgot password?

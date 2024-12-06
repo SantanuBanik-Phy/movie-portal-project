@@ -19,7 +19,7 @@ const Footer = () => {
                         Movie <span className="text-yellow-400">Por</span>tal
                         </h1>
                         <p className="text-sm text-gray-300 text-center lg:text-left">
-                        Movie Site management company
+                        Movie Portal is your go-to destination for discovering the latest movies, upcoming releases, and trending cinema.
                         </p>
                         {/* Social Media Icons */}
                         <div className="flex justify-center lg:justify-start gap-4 mt-4">

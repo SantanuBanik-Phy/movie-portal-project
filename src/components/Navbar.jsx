@@ -13,7 +13,7 @@ const Navbar = () => {
 
   return (
     <div className="w-full bg-gradient-to-r from-[#19284a] to-[#33526d] py-3">
-      <div className="navbar px-6 lg:px-12">
+      <div className="navbar px-4 lg:px-12">
         {/* Logo and Brand */}
         <div className="navbar-start">
           <Link to="/">
@@ -66,14 +66,14 @@ const Navbar = () => {
         </div>
 
         {/* User Section */}
-        <div className="ml-8 md:ml-0 navbar-end space-x-6">
+        <div className="ml-10 navbar-end space-x-6">
           {/* User Profile or Login/Register */}
           {user && user?.email ? (
-            <div className="flex items-center space-x-4">
+            <div  className="flex flex-col md:flex-row justify-center gap-2 items-center space-x-4 ">
               <div className="tooltip tooltip-bottom" data-tip={displayName}>
                 <img
                   src={user?.photoURL}
-                  className="w-12 h-12 rounded-full cursor-pointer border-2 border-yellow-400"
+                  className="w-12 h-12   rounded-full cursor-pointer border-2 border-yellow-400"
                   alt="User"
                 />
               </div>
