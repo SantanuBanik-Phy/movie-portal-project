@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Rating } from "react-simple-star-rating";
 import { AuthContext } from "../provider/AuthProvider";
@@ -11,25 +11,28 @@ const AddMovieForm = () => {
     const { user } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [rating, setRating] = useState(0);
+    const ratingRef = useRef(null);
+
 
     const handleStarClick = (value) => {
         setRating(value);
+       
     };
+  
 
     const onSubmit = async (data) => {
         const hasValidationErrors = Object.keys(errors).length > 0;
 
-        if (hasValidationErrors) {
-            handleValidationErrors(); 
+        if (hasValidationErrors || rating === 0) {
+            if (hasValidationErrors) {
+                handleValidationErrors();
+            }
+            if (rating === 0) {
+                toast.error("Please provide a rating.");
+            }
             return;
         }
 
-        if (rating === 0) {
-            toast.error("Please provide a rating.");
-            return;
-        }
-
-        // Add user email and rating to the data
         data.userEmail = user.email;
         data.rating = rating;
 
@@ -48,11 +51,16 @@ const AddMovieForm = () => {
                     text: "Movie added successfully.",
                     icon: "success",
                     confirmButtonText: "Ok",
+                }).then(() => { 
+                    reset();
+                    setRating(0);
+                    if (ratingRef.current) {
+                        ratingRef.current.resetValue();
+                    } 
+                     
+                   
+                   
                 });
-
-                // Reset the form and the rating immediately
-                setRating(0); // Reset rating before resetting form
-                reset(); // Reset form fields
             } else {
                 toast.error("Failed to add the movie. Please try again.");
             }
@@ -68,10 +76,17 @@ const AddMovieForm = () => {
         });
     };
 
-    // Ensure rating resets when form is reset
     useEffect(() => {
-        setRating(0); // Reset rating when form is reset
-    }, [reset]);
+        const hasValidationErrors = Object.keys(errors).length > 0;
+        if (hasValidationErrors) {
+            handleValidationErrors();
+        }
+    }, [errors]);
+    
+
+    
+   
+
 
     return (
         <div className="container mx-auto p-6 max-w-4xl">
@@ -83,7 +98,7 @@ const AddMovieForm = () => {
                 onSubmit={handleSubmit(onSubmit, handleValidationErrors)}
                 className="bg-white shadow-lg rounded-lg p-8 space-y-6"
             >
-                {/* Movie Poster */}
+               
                 <div>
                     <label className="block font-medium text-gray-700 mb-2">
                         Movie Poster URL
@@ -119,7 +134,7 @@ const AddMovieForm = () => {
                     />
                 </div>
 
-                {/* Genre */}
+               
                 <div>
                     <label className="block font-medium text-gray-700 mb-2">
                         Genre
@@ -140,7 +155,7 @@ const AddMovieForm = () => {
                     </select>
                 </div>
 
-                {/* Duration */}
+              
                 <div>
                     <label className="block font-medium text-gray-700 mb-2">
                         Duration (minutes)
@@ -155,7 +170,7 @@ const AddMovieForm = () => {
                     />
                 </div>
 
-                {/* Release Year */}
+        
                 <div>
                     <label className="block font-medium text-gray-700 mb-2">
                         Release Year
@@ -180,25 +195,30 @@ const AddMovieForm = () => {
                     </select>
                 </div>
 
-                {/* Rating */}
+              
                 <div>
                     <label className="block font-medium text-gray-700 mb-2">
                         Rating
                     </label>
                     <div className="" >
                     <Rating
-                        onClick={handleStarClick}
+                        key={rating} 
+                        ref={ratingRef}
+                        onPointerMove={handleStarClick}
                         ratingValue={rating}
                         initialValue={0}
                         size={30}
+                        allowFraction={true}
                         transition={true}
+                        SVGstyle={{'display': 'inline'}}
+                        
                        
                        
                     />
                     </div>
                 </div>
 
-                {/* Summary */}
+           
                 <div>
                     <label className="block font-medium text-gray-700 mb-2">
                         Summary

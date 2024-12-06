@@ -4,6 +4,7 @@ import { AuthContext } from "../provider/AuthProvider";
 import google from "../assets/google.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Helmet } from "react-helmet";
 
 const Register = () => {
   const { createUser, googleSignIn, setUser, updateUserProfile } =
@@ -160,6 +161,9 @@ const Register = () => {
           </form>
         </div>
       </div>
+      <Helmet>
+            <title>Register - Movie Portal</title>  
+         </Helmet>
     </div>
   );
 };

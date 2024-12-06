@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import logo from "../assets/logo.png";
+import { Helmet } from "react-helmet";
 
 const AboutUs = () => {
     // Animation Variants
@@ -28,7 +29,10 @@ const AboutUs = () => {
             variants={staggerContainer}
             className="container mx-auto p-6 my-12"
         >
-            {/* Hero Section */}
+          <Helmet>
+        <title>About Us | Movie Portal</title>
+       
+    </Helmet>
             <motion.div
                 variants={fadeInUp}
                 className="hero bg-gradient-to-r from-[#17264b] to-[#456f94] rounded-xl text-white shadow-xl mb-12"
@@ -144,6 +148,7 @@ const AboutUs = () => {
             </motion.div>
         </motion.div>
     );
+    
 };
 
 export default AboutUs;

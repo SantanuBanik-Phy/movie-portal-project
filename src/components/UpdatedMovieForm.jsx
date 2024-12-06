@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { Rating } from "react-simple-star-rating";
 import { useParams } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
+import { Helmet } from "react-helmet";
 
 const UpdateMovieForm = () => {
     const { id } = useParams();
@@ -200,8 +201,9 @@ const UpdateMovieForm = () => {
                         ratingValue={rating}
                         initialValue={rating}
                         size={30}
-                        transition
-                        className="flex justify-start"
+                        allowFraction={true}
+                        SVGstyle={{'display': 'inline'}}
+
                     />
                 </div>
 
@@ -228,6 +230,9 @@ const UpdateMovieForm = () => {
                     </button>
                 </div>
             </form>
+            <Helmet>
+            <title>Update Movie - Movie Portal</title>
+         </Helmet>
         </div>
     );
 };

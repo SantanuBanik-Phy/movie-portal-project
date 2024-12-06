@@ -1,4 +1,5 @@
 
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 
 const ErrorPage = () => {
@@ -11,6 +12,9 @@ const ErrorPage = () => {
                     <Link to="/" className="btn bg-green-500">Go Back Home</Link>
                 </div>
             </div>
+            <Helmet>
+             <title>Error | Movie Portal</title>
+         </Helmet>
         </div>
     );
 };

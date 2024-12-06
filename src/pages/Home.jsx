@@ -4,6 +4,7 @@ import Banner from "../components/Banner";
 import MovieCard from "../components/MovieCard";
 import UpcomingMovies from "../components/UpcomingMovies";
 import MovieNews from "../components/MovieNews";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const movies = useLoaderData();
@@ -86,6 +87,9 @@ const Home = () => {
                <MovieNews isDarkMode={isDarkMode}></MovieNews>
             </div>
       </div>
+      <Helmet>
+            <title>Movie Portal - Home</title>
+         </Helmet>
     </div>
   );
 };

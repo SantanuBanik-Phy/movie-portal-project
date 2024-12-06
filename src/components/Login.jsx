@@ -4,6 +4,7 @@ import { AuthContext } from "../provider/AuthProvider";
 import google from "../assets/google.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Helmet } from "react-helmet";
 
 const Login = () => {
   const { login, googleSignIn, setUser } = useContext(AuthContext);
@@ -117,6 +118,9 @@ const Login = () => {
           </form>
         </div>
       </div>
+      <Helmet>
+             <title>Login - Movie Portal</title>
+         </Helmet>
     </div>
   );
 };

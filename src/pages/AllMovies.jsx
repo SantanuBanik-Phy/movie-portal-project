@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import MovieCard from "../components/MovieCard";
+import { Helmet } from "react-helmet";
 
 const AllMovies = () => {
     const [movies, setMovies] = useState([]);
@@ -74,6 +75,9 @@ const AllMovies = () => {
                     )}
                 </div>
             )}
+             <Helmet>
+            <title>All Movies | Movie Portal</title>
+         </Helmet>
         </div>
     );
 };

@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../provider/AuthProvider";
+import { Helmet } from "react-helmet";
 
 const MyFavorites = () => {
     const { user } = useContext(AuthContext); // Access logged-in user context
@@ -123,6 +124,11 @@ const MyFavorites = () => {
                     ))}
                 </div>
             )}
+             <Helmet>
+                  <title>My Favorite Movies - Movies Portal</title>
+                 
+   
+         </Helmet>
         </div>
     );
 };

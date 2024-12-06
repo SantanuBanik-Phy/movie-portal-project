@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import AddMovieForm from "../components/AddMovieForm";
 
 
@@ -5,7 +6,14 @@ import AddMovieForm from "../components/AddMovieForm";
 
 const AddMovie = () => {
     return (
-        <AddMovieForm />
+        <> 
+         <AddMovieForm />
+         <Helmet>
+            <title>Add Movie | Movie Portal</title>
+         </Helmet>
+        </>
+       
+        
     );
 };
 
