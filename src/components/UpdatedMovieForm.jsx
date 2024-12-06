@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
-import { Rating } from 'react-simple-star-rating';
+import { Rating } from "react-simple-star-rating";
 import { useParams } from "react-router-dom";
-
+import "react-toastify/dist/ReactToastify.css";
 
 const UpdateMovieForm = () => {
     const { id } = useParams();
-    const { register, handleSubmit, formState: { errors }, setValue,reset } = useForm();
+    const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm();
     const [rating, setRating] = useState(0);
     const [loading, setLoading] = useState(true);
 
@@ -16,7 +16,6 @@ const UpdateMovieForm = () => {
             try {
                 const response = await fetch(`http://localhost:3000/movies/${id}`);
                 const movieData = await response.json();
-               
 
                 // Set default values for the form fields
                 setValue("poster", movieData.poster);
@@ -50,7 +49,7 @@ const UpdateMovieForm = () => {
 
         try {
             const response = await fetch(`http://localhost:3000/movies/${id}`, {
-                method: "PUT", 
+                method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -59,7 +58,7 @@ const UpdateMovieForm = () => {
 
             if (response.ok) {
                 toast.success("Movie updated successfully!");
-                reset(); 
+                reset();
                 setRating(0);
             } else {
                 toast.error("Failed to update movie.");
@@ -69,6 +68,7 @@ const UpdateMovieForm = () => {
             toast.error("Failed to update movie.");
         }
     };
+
     const handleValidationErrors = () => {
         Object.keys(errors).forEach((key) => {
             toast.error(errors[key].message);
@@ -77,23 +77,27 @@ const UpdateMovieForm = () => {
 
     if (loading) {
         return (
-            <div className="text-center">
-                
+            <div className="flex justify-center items-center h-screen">
                 <span className="loading loading-infinity loading-lg"></span>
             </div>
         );
     }
 
     return (
-        <div className="container mx-auto p-6">
-          
-            
-            <ToastContainer position={"top-center"}></ToastContainer>
-            <h1 className="text-4xl font-bold text-center mb-8">Update Movie</h1>
-            <form onSubmit={handleSubmit(onSubmit,handleValidationErrors)} className="max-w-3xl mx-auto">
+        <div className="container mx-auto p-6 max-w-4xl">
+            <ToastContainer position="top-center" />
+            <h1 className="text-4xl font-bold text-center mb-8 mt-8 ">
+                Update Movie
+            </h1>
+            <form
+                onSubmit={handleSubmit(onSubmit, handleValidationErrors)}
+                className="bg-white shadow-lg rounded-lg p-8 space-y-6"
+            >
                 {/* Movie Poster */}
-                <div className="form-control">
-                    <label className="label">Movie Poster URL</label>
+                <div>
+                    <label className="block font-medium text-gray-700 mb-2">
+                        Movie Poster URL
+                    </label>
                     <input
                         type="text"
                         {...register("poster", {
@@ -103,14 +107,15 @@ const UpdateMovieForm = () => {
                                 message: "Invalid URL",
                             },
                         })}
-                        className="input input-bordered"
+                        className="w-full input input-bordered focus:ring-2 focus:ring-teal-500 focus:outline-none"
                     />
-               
                 </div>
 
                 {/* Movie Title */}
-                <div className="form-control">
-                    <label className="label">Movie Title</label>
+                <div>
+                    <label className="block font-medium text-gray-700 mb-2">
+                        Movie Title
+                    </label>
                     <input
                         type="text"
                         {...register("title", {
@@ -120,81 +125,102 @@ const UpdateMovieForm = () => {
                                 message: "Title must be at least 2 characters long",
                             },
                         })}
-                        className="input input-bordered"
+                        className="w-full input input-bordered focus:ring-2 focus:ring-teal-500 focus:outline-none"
                     />
-                  
                 </div>
 
                 {/* Genre */}
-                <div className="form-control">
-                    <label className="label">Genre</label>
+                <div>
+                    <label className="block font-medium text-gray-700 mb-2">
+                        Genre
+                    </label>
                     <select
                         {...register("genre", { required: "Please select a genre" })}
-                        className="select select-bordered"
+                        className="w-full select select-bordered focus:ring-2 focus:ring-teal-500 focus:outline-none"
                     >
                         <option value="">Select Genre</option>
                         <option value="comedy">Comedy</option>
                         <option value="drama">Drama</option>
                         <option value="horror">Horror</option>
+                        <option value="romance">Romance</option>
+                        <option value="action">Action</option>
+                        <option value="history">History</option>
+                        <option value="science fiction">Science Fiction</option>
+                        <option value="animation">Animation</option>
                     </select>
-                   
                 </div>
 
                 {/* Duration */}
-                <div className="form-control">
-                    <label className="label">Duration (minutes)</label>
+                <div>
+                    <label className="block font-medium text-gray-700 mb-2">
+                        Duration (minutes)
+                    </label>
                     <input
                         type="number"
                         {...register("duration", {
                             required: "Duration is required",
                             min: { value: 60, message: "Duration must be at least 60 minutes" },
                         })}
-                        className="input input-bordered"
+                        className="w-full input input-bordered focus:ring-2 focus:ring-teal-500 focus:outline-none"
                     />
-                    
                 </div>
 
                 {/* Release Year */}
-                <div className="form-control">
-                    <label className="label">Release Year</label>
+                <div>
+                    <label className="block font-medium text-gray-700 mb-2">
+                        Release Year
+                    </label>
                     <select
                         {...register("releaseYear", { required: "Please select a release year" })}
-                        className="select select-bordered"
+                        className="w-full select select-bordered focus:ring-2 focus:ring-teal-500 focus:outline-none"
                     >
                         <option value="">Select Year</option>
                         <option value="2024">2024</option>
                         <option value="2023">2023</option>
                         <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                        <option value="2019">2019</option>
                     </select>
-                
                 </div>
 
                 {/* Rating */}
-                <div className="form-control">
-                    <label className="label">Rating</label>
+                <div>
+                    <label className="block font-medium text-gray-700 mb-2">
+                        Rating
+                    </label>
                     <Rating
                         onClick={handleStarClick}
                         ratingValue={rating}
                         initialValue={rating}
                         size={30}
                         transition
+                        className="flex justify-start"
                     />
                 </div>
 
                 {/* Summary */}
-                <div className="form-control">
-                    <label className="label">Summary</label>
+                <div>
+                    <label className="block font-medium text-gray-700 mb-2">
+                        Summary
+                    </label>
                     <textarea
                         {...register("summary", {
                             required: "Summary is required",
                             minLength: { value: 10, message: "Summary must be at least 10 characters long" },
                         })}
-                        className="textarea textarea-bordered h-24"
+                        className="w-full textarea textarea-bordered h-24 focus:ring-2 focus:ring-teal-500 focus:outline-none"
                     />
-                   
                 </div>
 
-                <button type="submit" className="btn btn-primary mt-4">Update Movie</button>
+                <div>
+                    <button
+                        type="submit"
+                        className="w-full py-3 bg-gradient-to-r from-teal-400 to-green-500 text-white font-bold rounded-lg shadow-lg hover:from-teal-500 hover:to-green-600 transition-transform transform hover:scale-105"
+                    >
+                        Update Movie
+                    </button>
+                </div>
             </form>
         </div>
     );

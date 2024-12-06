@@ -1,23 +1,40 @@
 import { Link } from "react-router-dom";
 
 const MovieCard = ({ movie, isDarkMode }) => {
-    const textColorClass = isDarkMode ? "text-white" : "text-black";
+    const cardBgClass = isDarkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800";
+    const hoverEffectClass = isDarkMode
+        ? "hover:shadow-gray-700"
+        : "hover:shadow-gray-300";
 
     return (
-        <div className={`card bg-base-100 shadow-xl ${isDarkMode ? "bg-gray-800" : "bg-white"}`}>
-            <figure>
-                <img src={movie.poster} alt={movie.title} className="w-full h-48 object-cover" />
+        <div
+            className={`card shadow-lg transition-transform transform hover:-translate-y-2 hover:shadow-xl ${hoverEffectClass} ${cardBgClass} rounded-lg overflow-hidden`}
+        >
+            <figure className="relative">
+                <img
+                    src={movie.poster}
+                    alt={movie.title}
+                    className="w-full h-48 object-cover transition-transform transform hover:scale-105"
+                />
+                <div className="absolute top-2 left-2 px-3 py-1 bg-black bg-opacity-50 text-white text-sm font-semibold rounded">
+                    {movie.genre}
+                </div>
             </figure>
-            <div className={`card-body ${textColorClass}`}>
-                <h2 className={`card-title font-bold ${textColorClass}`}>{movie.title}</h2>
-                <div className={`badge  bg-gradient-to-r from-[#0B98AC] to-[#A8EB12] mr-2 font-semibold`}>{movie.genre}</div>
-                <p className={textColorClass}> <span className="font-semibold">Duration:</span> {movie.duration} mins</p>
-                <p className={textColorClass}> <span className="font-semibold">Release Year:</span> {movie.releaseYear}</p>
-                <p className={textColorClass}><span className="font-semibold">Rating:</span> {movie.rating}</p>
-                <div className="card-actions justify-end">
+            <div className="p-4">
+                <h2 className="text-lg font-bold mb-2 truncate">{movie.title}</h2>
+                <p className="text-sm mb-1">
+                    <span className="font-semibold">Duration:</span> {movie.duration} mins
+                </p>
+                <p className="text-sm mb-1">
+                    <span className="font-semibold">Release Year:</span> {movie.releaseYear}
+                </p>
+                <p className="text-sm mb-3">
+                    <span className="font-semibold">Rating:</span> {movie.rating}
+                </p>
+                <div className="text-right">
                     <Link
                         to={`/movie-details/${movie._id}`}
-                        className={`btn font-semibold text-white bg-gradient-to-l from-[#0B98AC] to-[#8ec90d] rounded-xl ${isDarkMode ? "btn-outline" : ""}`}
+                        className="inline-block px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-green-400 to-blue-500 rounded-lg shadow-md hover:from-green-500 hover:to-blue-600 transition-colors"
                     >
                         See Details
                     </Link>
