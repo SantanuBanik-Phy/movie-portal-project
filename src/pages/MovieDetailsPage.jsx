@@ -15,14 +15,23 @@ const MovieDetailsPage = () => {
     useEffect(() => {
         const fetchMovieDetails = async () => {
             try {
+                setLoading(true);
+
+                // Fetch movie details
                 const response = await fetch(`https://b10-a10-server-site.vercel.app/movies/${id}`);
                 const data = await response.json();
                 setMovie(data);
 
+                // Check if the movie is already in favorites
                 if (user) {
-                    const favoritesResponse = await fetch(`https://b10-a10-server-site.vercel.app/favorites?email=${user.email}&movieId=${id}`);
+                    const favoritesResponse = await fetch(
+                        `https://b10-a10-server-site.vercel.app/favorites?email=${user.email}`
+                    );
                     const favoritesData = await favoritesResponse.json();
-                    setIsFavorite(favoritesData.length > 0);
+                    const isMovieFavorite = favoritesData.some((fav) => fav._id === id);
+                    setIsFavorite(isMovieFavorite);
+                } else {
+                    setIsFavorite(false);
                 }
             } catch (error) {
                 console.error("Error fetching movie details:", error);
@@ -52,7 +61,9 @@ const MovieDetailsPage = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const response = await fetch(`https://b10-a10-server-site.vercel.app/movies/${_id}`, { method: "DELETE" });
+                    const response = await fetch(`https://b10-a10-server-site.vercel.app/movies/${_id}`, {
+                        method: "DELETE",
+                    });
                     const data = await response.json();
 
                     if (data.deletedCount > 0) {
@@ -138,7 +149,7 @@ const MovieDetailsPage = () => {
     }
 
     return (
-        <div className="container mx-auto px-6 mt-40  my-12">
+        <div className="container mx-auto px-6 mt-40 my-12">
             <h1 className="text-4xl font-bold text-center mb-8 text-gray-800">{movie.title}</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Poster */}
@@ -148,7 +159,9 @@ const MovieDetailsPage = () => {
 
                 {/* Movie Details */}
                 <div className="bg-gray-100 p-6 rounded-lg shadow-lg">
-                    <p className="mb-2"><strong>Genre:</strong> <span className="badge bg-green-200 text-green-800">{movie.genre}</span></p>
+                    <p className="mb-2">
+                        <strong>Genre:</strong> <span className="badge bg-green-200 text-green-800">{movie.genre}</span>
+                    </p>
                     <p className="mb-2"><strong>Duration:</strong> {movie.duration} mins</p>
                     <p className="mb-2"><strong>Release Year:</strong> {movie.releaseYear}</p>
                     <p className="mb-2"><strong>Rating:</strong> {movie.rating}</p>
@@ -182,9 +195,7 @@ const MovieDetailsPage = () => {
             </div>
             <Helmet>
                 <title>{movie.title} | Movie Details</title>
-                
-   
-         </Helmet>
+            </Helmet>
         </div>
     );
 };

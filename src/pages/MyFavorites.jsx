@@ -4,9 +4,9 @@ import { AuthContext } from "../provider/AuthProvider";
 import { Helmet } from "react-helmet";
 
 const MyFavorites = () => {
-    const { user } = useContext(AuthContext); // Access logged-in user context
-    const [favoriteMovies, setFavoriteMovies] = useState([]); // State to store favorite movies
-    const [loading, setLoading] = useState(true); // Loading state
+    const { user } = useContext(AuthContext); 
+    const [favoriteMovies, setFavoriteMovies] = useState([]); 
+    const [loading, setLoading] = useState(true); 
 
     useEffect(() => {
         const fetchFavoriteMovies = async () => {
@@ -18,54 +18,61 @@ const MyFavorites = () => {
                 } catch (error) {
                     console.error("Error fetching favorite movies:", error);
                 } finally {
-                    setLoading(false); 
+                    setLoading(false);
                 }
             } else {
-                setLoading(false); 
+                setLoading(false);
             }
         };
 
         fetchFavoriteMovies();
     }, [user]);
 
-    // Handle the removal of a movie from favorites
-    const handleRemoveFavorites = async () => {
+    // Handle the removal of a specific movie from favorites
+    const handleRemoveFavorite = async (movieId) => {
         Swal.fire({
             title: "Are you sure?",
-            text: "This will remove your favorite movie!",
+            text: "This will remove the selected movie from your favorites.",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete!",
+            confirmButtonText: "Yes, remove it!",
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const response = await fetch(`https://b10-a10-server-site.vercel.app/favorites?email=${user.email}`, {
+                    const response = await fetch(`https://b10-a10-server-site.vercel.app/favorites/${movieId}`, {
                         method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json",
+                            email: user.email, // Pass the user's email to verify ownership
+                        },
                     });
 
                     if (response.ok) {
-                        setFavoriteMovies([]);
+                        // Filter out the deleted movie from the local state
+                        setFavoriteMovies((prevFavorites) =>
+                            prevFavorites.filter((movie) => movie._id !== movieId)
+                        );
 
                         Swal.fire({
-                            title: "Deleted!",
-                            text: "Your favorite movies has been removed.",
+                            title: "Removed!",
+                            text: "The movie has been removed from your favorites.",
                             icon: "success",
                         });
                     } else {
                         const errorData = await response.json();
                         Swal.fire({
                             title: "Error!",
-                            text: errorData.message || "Failed to delete favorite movies.",
+                            text: errorData.message || "Failed to remove the movie from favorites.",
                             icon: "error",
                         });
                     }
                 } catch (error) {
-                    console.error("Error deleting favorites:", error);
+                    console.error("Error removing favorite movie:", error);
                     Swal.fire({
                         title: "Error!",
-                        text: "Failed to delete your favorite movies.",
+                        text: "Failed to remove the movie. Please try again.",
                         icon: "error",
                     });
                 }
@@ -114,7 +121,7 @@ const MyFavorites = () => {
                                         : movie.summary}
                                 </p>
                                 <button
-                                    onClick={handleRemoveFavorites}
+                                    onClick={() => handleRemoveFavorite(movie._id)}
                                     className="w-full bg-gradient-to-r from-red-500 to-pink-600 text-white py-2 px-4 rounded-lg text-sm font-semibold shadow-md hover:from-pink-600 hover:to-red-500 transition-transform transform hover:scale-105"
                                 >
                                     Remove from Favorites
@@ -124,11 +131,9 @@ const MyFavorites = () => {
                     ))}
                 </div>
             )}
-             <Helmet>
-                  <title>My Favorite Movies - Movies Portal</title>
-                 
-   
-         </Helmet>
+            <Helmet>
+                <title>My Favorite Movies - Movies Portal</title>
+            </Helmet>
         </div>
     );
 };
