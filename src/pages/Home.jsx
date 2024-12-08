@@ -5,6 +5,7 @@ import MovieCard from "../components/MovieCard";
 import UpcomingMovies from "../components/UpcomingMovies";
 import MovieNews from "../components/MovieNews";
 import { Helmet } from "react-helmet";
+import UserReviews from "../components/UserReviews";
 
 const Home = () => {
   const movies = useLoaderData() || []; 
@@ -104,16 +105,23 @@ const Home = () => {
 
        
         <div className="container mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold ml-24 text-yellow-500">Upcoming Movies</h2>
+          <h2 className="text-3xl md:text-4xl font-bold ml-24 text-yellow-500 mb-8">Upcoming Movies</h2>
           <UpcomingMovies isDarkMode={isDarkMode}></UpcomingMovies>
         </div>
 
        
         <div className="container mx-auto">
-          <h2 className="text-3xl md:text-4xl text-yellow-500 font-bold text-center mb-8">
+          <h2 className="text-3xl md:text-4xl text-yellow-500 font-bold text-center mt-8 mb-4">
             Latest Movie News
           </h2>
           <MovieNews isDarkMode={isDarkMode}></MovieNews>
+        </div>
+
+        <div className="container mx-auto">
+          <h2 className="text-3xl md:text-4xl text-yellow-500 font-bold text-center mb-8">
+            User Reviews
+          </h2>
+          <UserReviews isDarkMode={isDarkMode} />
         </div>
       </div>
       <Helmet>
