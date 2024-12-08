@@ -8,13 +8,12 @@ import { Helmet } from "react-helmet";
 import UserReviews from "../components/UserReviews";
 
 const Home = () => {
-  const movies = useLoaderData() || []; 
+  const movies = useLoaderData() || [];
   const [loading, setLoading] = useState(true);
   const [loadedMovies, setLoadedMovies] = useState(movies);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-   
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {
       setIsDarkMode(savedTheme === "dark");
@@ -25,18 +24,16 @@ const Home = () => {
         const response = await fetch("https://b10-a10-server-site.vercel.app/movies");
         const mongoMovies = await response.json();
 
-       
         if (Array.isArray(mongoMovies)) {
-          
           const featuredMovies = mongoMovies.sort((a, b) => b.rating - a.rating).slice(0, 6);
           setLoadedMovies(featuredMovies);
         } else {
           console.error("Fetched data is not an array:", mongoMovies);
-          setLoadedMovies([]); 
+          setLoadedMovies([]);
         }
       } catch (error) {
         console.error("Error fetching movies:", error);
-        setLoadedMovies([]); 
+        setLoadedMovies([]);
       } finally {
         setLoading(false);
       }
@@ -47,24 +44,26 @@ const Home = () => {
 
   // Toggle Theme
   const handleThemeToggle = () => {
-    const newTheme = !isDarkMode ? "dark" : "light"; 
+    const newTheme = !isDarkMode ? "dark" : "light";
     setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle("dark", !isDarkMode); 
+    document.documentElement.classList.toggle("dark", !isDarkMode);
     localStorage.setItem("theme", newTheme);
   };
 
   return (
     <div className={isDarkMode ? "dark" : ""}>
       <div className="bg-white dark:bg-gray-900 text-black dark:text-white min-h-screen transition-colors">
-     
         <div className="py-1 pr-6 flex justify-end items-center">
-          <button onClick={handleThemeToggle} className="btn btn-outline">
-            {isDarkMode ? (
-              <i className="fa-solid fa-sun text-2xl text-white"></i>
-            ) : (
-              <i className="fa-solid fa-moon text-3xl"></i>
-            )}
-          </button>
+          <div
+            onClick={handleThemeToggle}
+            className="flex items-center bg-gray-300 dark:bg-gray-600 w-14 h-8 rounded-full p-1 cursor-pointer transition-all"
+          >
+            <div
+              className={`transform transition-all duration-300 w-6 h-6 bg-yellow-400 dark:bg-blue-500 rounded-full ${
+                isDarkMode ? "translate-x-6" : "translate-x-0"
+              }`}
+            ></div>
+          </div>
         </div>
 
         {loading ? (
@@ -75,7 +74,6 @@ const Home = () => {
           <>
             <Banner />
 
-            
             <div className="container mx-auto p-6 my-12">
               <h2 className="text-3xl md:text-4xl font-bold text-yellow-500 text-center mb-8">
                 Featured Movies
@@ -103,13 +101,13 @@ const Home = () => {
           </>
         )}
 
-       
         <div className="container mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold ml-24 text-yellow-500 mb-8">Upcoming Movies</h2>
+          <h2 className="text-3xl md:text-4xl font-bold ml-24 text-yellow-500 mb-8">
+            Upcoming Movies
+          </h2>
           <UpcomingMovies isDarkMode={isDarkMode}></UpcomingMovies>
         </div>
 
-       
         <div className="container mx-auto">
           <h2 className="text-3xl md:text-4xl text-yellow-500 font-bold text-center mt-8 mb-4">
             Latest Movie News
