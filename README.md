@@ -4,6 +4,7 @@ This is a user-friendly movie portal built with React that allows users to explo
 
 **Live Site URL:** [https://rambunctious-plantation.surge.sh/](https://rambunctious-plantation.surge.sh/)
 
+**Alternative URL:**  [https://movie-portal-project.vercel.app/](https://movie-portal-project.vercel.app/)
 ## Features
 
 *   **Homepage:**
