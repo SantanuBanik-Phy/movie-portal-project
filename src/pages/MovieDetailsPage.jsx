@@ -23,7 +23,7 @@ const MovieDetailsPage = () => {
                 setMovie(data);
 
                 // Check if the movie is already in favorites
-                if (user) {
+                if (user && user.email) {
                     const favoritesResponse = await fetch(
                         `https://b10-a10-server-site.vercel.app/favorites?email=${user.email}`
                     );
@@ -50,6 +50,16 @@ const MovieDetailsPage = () => {
     }, [id, user]);
 
     const handleDelete = async (_id) => {
+        if (!user || !user.email) {
+            Swal.fire({
+                title: "Unauthorized!",
+                text: "You must be logged in to delete a movie.",
+                icon: "warning",
+                confirmButtonText: "OK",
+            });
+            return;
+        }
+
         Swal.fire({
             title: "Are you sure?",
             text: "This action cannot be undone!",
@@ -88,6 +98,16 @@ const MovieDetailsPage = () => {
     };
 
     const handleAddToFavorites = async () => {
+        if (!user || !user.email) {
+            Swal.fire({
+                title: "Unauthorized!",
+                text: "You must be logged in to add a movie to your favorites.",
+                icon: "warning",
+                confirmButtonText: "OK",
+            });
+            return;
+        }
+
         if (isFavorite) {
             Swal.fire({
                 title: "Info!",
@@ -168,29 +188,41 @@ const MovieDetailsPage = () => {
                     <p className="mt-4 text-gray-600">{movie.summary}</p>
 
                     {/* Action Buttons */}
-                    <div className="mt-6 space-y-3">
-                        <button
-                            className="w-full py-2 px-4 bg-red-600 text-white rounded-lg shadow-md hover:bg-red-700 transition duration-200"
-                            onClick={() => handleDelete(movie._id)}
-                        >
-                            Delete Movie
-                        </button>
-                        <button
-                            className={`w-full py-2 px-4 rounded-lg shadow-md transition duration-200 ${
-                                isFavorite ? "bg-gray-400 cursor-not-allowed" : "bg-yellow-500 hover:bg-yellow-600"
-                            }`}
-                            onClick={handleAddToFavorites}
-                            disabled={isFavorite}
-                        >
-                            {isFavorite ? "Already in Favorites" : "Add to Favorites"}
-                        </button>
-                        <Link
-                            to={`/update-movie/${movie._id}`}
-                            className="block w-full py-2 px-4 bg-gradient-to-r from-[#19284a] to-[#619bca] text-white text-center rounded-lg shadow-md hover:from-blue-600 hover:to-green-500 transition duration-200"
-                        >
-                            Update Movie
-                        </Link>
-                    </div>
+                    {user && user.email ? (
+                        <div className="mt-6 space-y-3">
+                            <button
+                                className="w-full py-2 px-4 bg-red-600 text-white rounded-lg shadow-md hover:bg-red-700 transition duration-200"
+                                onClick={() => handleDelete(movie._id)}
+                            >
+                                Delete Movie
+                            </button>
+                            <button
+                                className={`w-full py-2 px-4 rounded-lg shadow-md transition duration-200 ${
+                                    isFavorite ? "bg-gray-400 cursor-not-allowed" : "bg-yellow-500 hover:bg-yellow-600"
+                                }`}
+                                onClick={handleAddToFavorites}
+                                disabled={isFavorite}
+                            >
+                                {isFavorite ? "Already in Favorites" : "Add to Favorites"}
+                            </button>
+                            <Link
+                                to={`/update-movie/${movie._id}`}
+                                className="block w-full py-2 px-4 bg-gradient-to-r from-[#19284a] to-[#619bca] text-white text-center rounded-lg shadow-md hover:from-blue-600 hover:to-green-500 transition duration-200"
+                            >
+                                Update Movie
+                            </Link>
+                        </div>
+                    ) : (
+                        <p className="text-center text-gray-500 mt-6">
+                            <Link
+                                to="/auth/login"
+                                className="text-yellow-500 underline hover:text-yellow-700"
+                            >
+                                Login
+                            </Link>{" "}
+                            to perform actions on this movie.
+                        </p>
+                    )}
                 </div>
             </div>
             <Helmet>

@@ -1,18 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 import { Rating } from "react-simple-star-rating";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet";
+import { AuthContext } from "../provider/AuthProvider";
 
 const UpdateMovieForm = () => {
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
     const { id } = useParams();
     const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm();
     const [rating, setRating] = useState(0);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        if (!user || !user.email) {
+            toast.error("Unauthorized! Please log in to update a movie.");
+            navigate("/auth/login");
+            return;
+        }
+
         const fetchMovie = async () => {
             try {
                 const response = await fetch(`https://b10-a10-server-site.vercel.app/movies/${id}`);
@@ -35,13 +44,18 @@ const UpdateMovieForm = () => {
         };
 
         fetchMovie();
-    }, [id, setValue]);
+    }, [id, setValue, user, navigate]);
 
     const handleStarClick = (value) => {
         setRating(value);
     };
 
     const onSubmit = async (data) => {
+        if (!user || !user.email) {
+            toast.error("Unauthorized! Please log in to update a movie.");
+            return;
+        }
+
         if (rating === 0) {
             toast.error("Please provide a rating.");
             return;
@@ -61,6 +75,7 @@ const UpdateMovieForm = () => {
                 toast.success("Movie updated successfully!");
                 reset();
                 setRating(0);
+             
             } else {
                 toast.error("Failed to update movie.");
             }
@@ -175,19 +190,15 @@ const UpdateMovieForm = () => {
                         {...register("releaseYear", { required: "Please select a release year" })}
                         className="w-full select select-bordered focus:ring-2 focus:ring-blue-900 focus:outline-none"
                     >
-                         <option value="">Select Year</option>
+                        <option value="">Select Year</option>
                         <option value="2024">2024</option>
                         <option value="2023">2023</option>
                         <option value="2022">2022</option>
                         <option value="2021">2021</option>
                         <option value="2020">2020</option>
                         <option value="2019">2019</option>
-                        <option value="2024">2018</option>
-                        <option value="2023">2017</option>
-                        <option value="2022">2016</option>
-                        <option value="2021">2015</option>
-                        <option value="2020">2014</option>
-                        <option value="2019">2012</option>
+                        <option value="2018">2018</option>
+                        <option value="2017">2017</option>
                     </select>
                 </div>
 
@@ -202,8 +213,7 @@ const UpdateMovieForm = () => {
                         initialValue={rating}
                         size={30}
                         allowFraction={true}
-                        SVGstyle={{'display': 'inline'}}
-
+                        SVGstyle={{ display: 'inline' }}
                     />
                 </div>
 
@@ -231,8 +241,8 @@ const UpdateMovieForm = () => {
                 </div>
             </form>
             <Helmet>
-            <title>Update Movie - Movie Portal</title>
-         </Helmet>
+                <title>Update Movie - Movie Portal</title>
+            </Helmet>
         </div>
     );
 };

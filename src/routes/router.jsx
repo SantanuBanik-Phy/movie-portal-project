@@ -12,6 +12,7 @@ import UpdateMovieForm from "../components/UpdatedMovieForm";
 import PrivateRoute from "./PrivateRoute";
 import ErrorPage from "../pages/ErrorPage";
 import AboutUs from "../pages/AboutUs";
+import Contact from "../pages/Contact";
 
 
 
@@ -42,7 +43,7 @@ const router = createBrowserRouter([
     },
     {   
     path: "/movie-details/:id",
-    element: <PrivateRoute><MovieDetailsPage /></PrivateRoute> 
+    element: <MovieDetailsPage /> 
    
     },
     {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
 {
   path: "/about",
   element: <AboutUs></AboutUs>
+},
+{
+  path: "/contact",
+  element: <Contact></Contact>
 }
    
     ],

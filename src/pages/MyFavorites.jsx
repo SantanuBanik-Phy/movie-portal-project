@@ -4,9 +4,9 @@ import { AuthContext } from "../provider/AuthProvider";
 import { Helmet } from "react-helmet";
 
 const MyFavorites = () => {
-    const { user } = useContext(AuthContext); 
-    const [favoriteMovies, setFavoriteMovies] = useState([]); 
-    const [loading, setLoading] = useState(true); 
+    const { user } = useContext(AuthContext);
+    const [favoriteMovies, setFavoriteMovies] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchFavoriteMovies = async () => {
@@ -28,7 +28,6 @@ const MyFavorites = () => {
         fetchFavoriteMovies();
     }, [user]);
 
-    // Handle the removal of a specific movie from favorites
     const handleRemoveFavorite = async (movieId) => {
         Swal.fire({
             title: "Are you sure?",
@@ -45,12 +44,11 @@ const MyFavorites = () => {
                         method: "DELETE",
                         headers: {
                             "Content-Type": "application/json",
-                            email: user.email, // Pass the user's email to verify ownership
+                            email: user.email,
                         },
                     });
 
                     if (response.ok) {
-                        // Filter out the deleted movie from the local state
                         setFavoriteMovies((prevFavorites) =>
                             prevFavorites.filter((movie) => movie._id !== movieId)
                         );
@@ -94,41 +92,55 @@ const MyFavorites = () => {
                     No favorite movies found. Start adding some!
                 </p>
             ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {favoriteMovies.map((movie) => (
-                        <div
-                            key={movie._id}
-                            className="group bg-white shadow-lg rounded-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300"
-                        >
-                            <img
-                                src={movie.poster}
-                                alt={movie.title}
-                                className="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
-                            <div className="p-6">
-                                <h2 className="text-2xl font-bold text-blue-900 mb-2">
-                                    {movie.title}
-                                </h2>
-                                <div className="text-sm text-gray-500 mb-4">
-                                    <p><strong>Genre:</strong> {movie.genre}</p>
-                                    <p><strong>Duration:</strong> {movie.duration} mins</p>
-                                    <p><strong>Release Year:</strong> {movie.releaseYear}</p>
-                                    <p><strong>Rating:</strong> {movie.rating}/5</p>
-                                </div>
-                                <p className="text-gray-700 text-sm mb-4">
-                                    {movie.summary.length > 100
-                                        ? `${movie.summary.substring(0, 100)}...`
-                                        : movie.summary}
-                                </p>
-                                <button
-                                    onClick={() => handleRemoveFavorite(movie._id)}
-                                    className="w-full bg-gradient-to-r from-red-500 to-pink-600 text-white py-2 px-4 rounded-lg text-sm font-semibold shadow-md hover:from-pink-600 hover:to-red-500 transition-transform transform hover:scale-105"
+                <div className="overflow-x-auto">
+                    <table className="table-auto w-full bg-white rounded-lg shadow-lg overflow-hidden">
+                        <thead className="bg-gradient-to-r from-[#19284a] to-[#33526d] text-white">
+                            <tr>
+                                <th className="px-6 py-4 text-left text-sm font-medium">Poster</th>
+                                <th className="px-6 py-4 text-left text-sm font-medium">Title</th>
+                                <th className="px-6 py-4 text-left text-sm font-medium">Genre</th>
+                                <th className="px-6 py-4 text-left text-sm font-medium">Duration</th>
+                                <th className="px-6 py-4 text-left text-sm font-medium">Release Year</th>
+                                <th className="px-6 py-4 text-left text-sm font-medium">Rating</th>
+                                <th className="px-6 py-4 text-center text-sm font-medium">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {favoriteMovies.map((movie, index) => (
+                                <tr
+                                    key={movie._id}
+                                    className={`${
+                                        index % 2 === 0 ? "bg-gray-100" : "bg-gray-50"
+                                    } hover:bg-gray-200 transition-colors`}
                                 >
-                                    Remove from Favorites
-                                </button>
-                            </div>
-                        </div>
-                    ))}
+                                    <td className="px-6 py-4">
+                                        <img
+                                            src={movie.poster}
+                                            alt={movie.title}
+                                            className="w-16 h-16 object-cover rounded"
+                                        />
+                                    </td>
+                                    <td className="px-6 py-4 font-semibold text-blue-900">
+                                        {movie.title}
+                                    </td>
+                                    <td className="px-6 py-4 text-gray-700">{movie.genre}</td>
+                                    <td className="px-6 py-4 text-gray-700">
+                                        {movie.duration} mins
+                                    </td>
+                                    <td className="px-6 py-4 text-gray-700">{movie.releaseYear}</td>
+                                    <td className="px-6 py-4 text-gray-700">{movie.rating}/5</td>
+                                    <td className="px-6 py-4 text-center">
+                                        <button
+                                            onClick={() => handleRemoveFavorite(movie._id)}
+                                            className="bg-red-500 text-white py-2 px-4 rounded-lg text-sm font-semibold shadow-md hover:bg-red-600 transition-transform transform hover:scale-105"
+                                        >
+                                            Remove
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             )}
             <Helmet>

@@ -17,7 +17,7 @@ const Navbar = () => {
         {/* Logo and Brand */}
         <div className="navbar-start">
           <Link to="/">
-            <span className="text-3xl  font-bold text-white tracking-wider transition-all duration-300 hover:text-yellow-400">
+            <span className="text-3xl font-bold text-white tracking-wider transition-all duration-300 hover:text-yellow-400">
               Movie <span className="text-yellow-400">Por</span>tal
             </span>
           </Link>
@@ -25,8 +25,7 @@ const Navbar = () => {
 
         {/* Navigation Links */}
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu text-white
-           menu-horizontal space-x-8 text-lg">
+          <ul className="menu text-white menu-horizontal space-x-8 text-lg">
             <NavLink
               to="/"
               className="hover:text-gray-200 transition-all duration-300 p-2 rounded-md hover:shadow-xl hover:bg-gray-700"
@@ -41,20 +40,24 @@ const Navbar = () => {
             >
               All Movies
             </NavLink>
-            <NavLink
-              to="/add-movie"
-              className="hover:text-gray-200 transition-all duration-300 p-2 rounded-md hover:shadow-xl hover:bg-gray-700"
-              activeClassName="bg-yellow-400 text-black shadow-xl"
-            >
-              Add Movie
-            </NavLink>
-            <NavLink
-              to="/my-favorites"
-              className="hover:text-gray-200 transition-all duration-300 p-2 rounded-md hover:shadow-xl hover:bg-gray-700"
-              activeClassName="bg-yellow-400 text-black shadow-xl"
-            >
-              My Favorites
-            </NavLink>
+            {user && user.email && (
+              <>
+                <NavLink
+                  to="/add-movie"
+                  className="hover:text-gray-200 transition-all duration-300 p-2 rounded-md hover:shadow-xl hover:bg-gray-700"
+                  activeClassName="bg-yellow-400 text-black shadow-xl"
+                >
+                  Add Movie
+                </NavLink>
+                <NavLink
+                  to="/my-favorites"
+                  className="hover:text-gray-200 transition-all duration-300 p-2 rounded-md hover:shadow-xl hover:bg-gray-700"
+                  activeClassName="bg-yellow-400 text-black shadow-xl"
+                >
+                  My Favorites
+                </NavLink>
+              </>
+            )}
             <NavLink
               to="/about"
               className="hover:text-gray-200 transition-all duration-300 p-2 rounded-md hover:shadow-xl hover:bg-gray-700"
@@ -62,24 +65,30 @@ const Navbar = () => {
             >
               About
             </NavLink>
+            <NavLink
+              to="/contact"
+              className="hover:text-gray-200 transition-all duration-300 p-2 rounded-md hover:shadow-xl hover:bg-gray-700"
+              activeClassName="bg-yellow-400 text-black shadow-xl"
+            >
+              Contact
+            </NavLink>
           </ul>
         </div>
 
         {/* User Section */}
         <div className="ml-10 navbar-end space-x-6">
-          {/* User Profile or Login/Register */}
-          {user && user?.email ? (
-            <div  className="flex flex-col md:flex-row justify-center gap-2 items-center space-x-4 ">
+          {user && user.email ? (
+            <div className="flex flex-col md:flex-row justify-center gap-2 items-center space-x-4">
               <div className="tooltip tooltip-bottom" data-tip={displayName}>
                 <img
-                  src={user?.photoURL}
-                  className="w-12 h-12   rounded-full cursor-pointer border-2 border-yellow-400"
+                  src={user.photoURL}
+                  className="w-12 h-12 rounded-full cursor-pointer border-2 border-yellow-400"
                   alt="User"
                 />
               </div>
               <button
                 onClick={logout}
-                className="btn  bg-yellow-400 hover:bg-yellow-500  rounded-full transition-all duration-300 shadow-md"
+                className="btn bg-yellow-400 hover:bg-yellow-500 rounded-full transition-all duration-300 shadow-md"
               >
                 Log out
               </button>
@@ -88,7 +97,7 @@ const Navbar = () => {
             <div className="flex space-x-4">
               <Link
                 to="/auth/login"
-                className="btn  bg-gray-200 hover:bg-yellow-500 text-black rounded-full transition-all duration-300 shadow-md"
+                className="btn bg-gray-200 hover:bg-yellow-500 text-black rounded-full transition-all duration-300 shadow-md"
               >
                 Login
               </Link>
@@ -143,24 +152,28 @@ const Navbar = () => {
                   All Movies
                 </NavLink>
               </li>
-              <li>
-                <NavLink
-                  to="/add-movie"
-                  className="hover:bg-gray-700 p-2 rounded-md"
-                  activeClassName="bg-yellow-400 text-black shadow-xl"
-                >
-                  Add Movie
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/my-favorites"
-                  className="hover:bg-gray-700 p-2 rounded-md"
-                  activeClassName="bg-yellow-400 text-black shadow-xl"
-                >
-                  My Favorites
-                </NavLink>
-              </li>
+              {user && user.email && (
+                <>
+                  <li>
+                    <NavLink
+                      to="/add-movie"
+                      className="hover:bg-gray-700 p-2 rounded-md"
+                      activeClassName="bg-yellow-400 text-black shadow-xl"
+                    >
+                      Add Movie
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/my-favorites"
+                      className="hover:bg-gray-700 p-2 rounded-md"
+                      activeClassName="bg-yellow-400 text-black shadow-xl"
+                    >
+                      My Favorites
+                    </NavLink>
+                  </li>
+                </>
+              )}
               <li>
                 <NavLink
                   to="/about"
@@ -168,6 +181,13 @@ const Navbar = () => {
                   activeClassName="bg-yellow-400 text-black shadow-xl"
                 >
                   About
+                </NavLink>
+                <NavLink
+                  to="/contact"
+                  className="hover:bg-gray-700 p-2 rounded-md"
+                  activeClassName="bg-yellow-400 text-black shadow-xl"
+                >
+                  Contact
                 </NavLink>
               </li>
             </ul>
