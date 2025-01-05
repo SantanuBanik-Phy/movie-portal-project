@@ -5,6 +5,8 @@ import google from "../assets/google.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet";
+import Lottie from "react-lottie-player";
+import registerAnimation from "../assets/register-animation.json"; // Add your Lottie JSON file here
 
 const Register = () => {
   const { createUser, googleSignIn, setUser, updateUserProfile } =
@@ -34,7 +36,7 @@ const Register = () => {
       return;
     }
     setPasswordError("");
-    setEmailError(""); 
+    setEmailError("");
 
     try {
       const result = await createUser(email, password);
@@ -74,189 +76,113 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen   bg-gradient-to-br from-gray-100 to-blue-200 flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-blue-200 flex items-center justify-center p-4">
       <ToastContainer position="top-center" />
-      <div className="w-full  md:max-w-2xl md:px-6 my-12 mx-4 ">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 ">
-            Register Now!
-          </h1>
+      <div className="flex flex-col lg:flex-row items-center justify-center w-full max-w-5xl bg-white shadow-lg rounded-xl overflow-hidden">
+        {/* Lottie Animation */}
+        <div className="w-full lg:w-1/2 flex justify-center items-center bg-blue-100 p-6">
+          <Lottie
+            loop
+            animationData={registerAnimation}
+            play
+            className="w-full h-auto max-w-md"
+          />
         </div>
-        <div className="card bg-white shadow-xl rounded-xl ">
-          <form onSubmit={handleRegister} className="card-body ">
+
+        {/* Registration Form */}
+        <div className="w-full lg:w-1/2 p-8">
+          <div className="text-center mb-6">
+            <h1 className="text-4xl font-bold text-gray-800">Register Now!</h1>
+            <p className="text-gray-600 mt-2">
+              Create an account to explore our amazing features.
+            </p>
+          </div>
+
+          <form onSubmit={handleRegister}>
             {/* Name Field */}
-            <div className="form-control mb-4">
-              <label className="label">
-                <span className="label-text font-bold ">
-                  Name
-                </span>
-              </label>
-              <div className="relative">
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Enter your name"
-                  className="input input-bordered pl-12 w-full "
-                  required
-                />
-                <span className="absolute left-3 top-3.5 text-gray-400">
-             
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="2"
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M15.75 7.5A3.75 3.75 0 1112 3.75 3.75 3.75 0 0115.75 7.5zM6.75 18a8.25 8.25 0 0113.5 0"
-                    />
-                  </svg>
-                </span>
-              </div>
+            <div className="mb-4">
+              <label className="block text-gray-600 font-semibold mb-2">Name</label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Enter your name"
+                className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring focus:ring-indigo-300"
+                required
+              />
             </div>
 
-         
-            <div className="form-control mb-4">
-              <label className="label">
-                <span className="label-text font-bold text-gray-600 ">
-                  Email
-                </span>
-              </label>
-              <div className="relative">
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Enter your email"
-                  className="input input-bordered pl-12 w-full "
-                  required
-                />
-                <span className="absolute left-3 top-3.5 text-gray-400">
-              
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="2"
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M2.25 6.75v10.5a2.25 2.25 0 002.25 2.25h15a2.25 2.25 0 002.25-2.25V6.75m-19.5 0l9.75 6.75m-9.75-6.75l9.75 6.75m0 0l9.75-6.75"
-                    />
-                  </svg>
-                </span>
-              </div>
+            {/* Email Field */}
+            <div className="mb-4">
+              <label className="block text-gray-600 font-semibold mb-2">Email</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring focus:ring-indigo-300"
+                required
+              />
               {emailError && (
                 <p className="text-red-500 text-sm mt-1">{emailError}</p>
               )}
             </div>
 
-          
-            <div className="form-control mb-4">
-              <label className="label">
-                <span className="label-text font-bold text-gray-600 ">
-                  Photo URL
-                </span>
-              </label>
-              <div className="relative">
-                <input
-                  type="text"
-                  name="photo"
-                  placeholder="Photo URL"
-                  className="input input-bordered pl-12 w-full "
-                  required
-                />
-                <span className="absolute left-3 top-3.5 text-gray-400">
-               
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="2"
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M8.25 15l3-3.75 3.75 4.5h5.25m-19.5 0h10.5M2.25 6.75v10.5a2.25 2.25 0 002.25 2.25h15a2.25 2.25 0 002.25-2.25V6.75M12 11.25l3 3.75"
-                    />
-                  </svg>
-                </span>
-              </div>
+            {/* Photo URL Field */}
+            <div className="mb-4">
+              <label className="block text-gray-600 font-semibold mb-2">Photo URL</label>
+              <input
+                type="text"
+                name="photo"
+                placeholder="Photo URL"
+                className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring focus:ring-indigo-300"
+                required
+              />
             </div>
 
-          
-            <div className="form-control mb-4">
-              <label className="label">
-                <span className="label-text font-bold text-gray-600 ">
-                  Password
-                </span>
-              </label>
-              <div className="relative">
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Enter your password"
-                  className="input input-bordered pl-12 w-full "
-                  required
-                />
-                <span className="absolute left-3 top-3.5 text-gray-400">
-              
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="2"
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M12 11.25a4.5 4.5 0 004.5-4.5V6a4.5 4.5 0 00-9 0v.75a4.5 4.5 0 004.5 4.5zM9.75 15H12v3.75h2.25M12 15v-3"
-                    />
-                  </svg>
-                </span>
-              </div>
+            {/* Password Field */}
+            <div className="mb-4">
+              <label className="block text-gray-600 font-semibold mb-2">Password</label>
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter your password"
+                className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring focus:ring-indigo-300"
+                required
+              />
               {passwordError && (
                 <p className="text-red-500 text-sm mt-1">{passwordError}</p>
               )}
             </div>
 
-            <div className="form-control mt-6">
-              <button
-                type="submit"
-                className="btn text-white bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:from-yellow-500 hover:to-yellow-400"
-              >
-                Register
-              </button>
-            </div>
-            <div className="divider">OR</div>
+            <button
+              type="submit"
+              className="w-full bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-white py-3 rounded-lg font-semibold hover:from-yellow-500 hover:to-yellow-400 transition duration-300"
+            >
+              Register
+            </button>
+
+            <div className="my-6 text-center text-gray-500">OR</div>
+
             <button
               onClick={handleGoogleSignIn}
-              className="btn btn-outline flex items-center justify-center"
+              className="w-full flex items-center justify-center bg-gray-100 py-3 rounded-lg shadow hover:bg-gray-200 transition duration-300"
             >
-              <img src={google} className="w-5 h-5 mr-2" alt="Google" />
+              <img src={google} className="w-5 h-5 mr-3" alt="Google logo" />
               Continue with Google
             </button>
-            <label className="label">
-              <p className="text-center mt-4">
-                Already have an account?{" "}
-                <Link className="text-blue-600 font-bold" to="/auth/login">
-                  Log in
-                </Link>
-              </p>
-            </label>
           </form>
+
+          <p className="text-center text-gray-600 mt-6">
+            Already have an account?{' '}
+            <Link
+              to="/auth/login"
+              className="text-indigo-600 font-semibold hover:underline"
+            >
+              Log in
+            </Link>
+          </p>
         </div>
       </div>
+
       <Helmet>
         <title>Register - Movie Portal</title>
       </Helmet>

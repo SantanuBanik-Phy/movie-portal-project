@@ -1,109 +1,133 @@
 import { Link, NavLink } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
-import "./Navbar.css";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
-  const [displayName, setDisplayName] = useState(user?.displayName || "");
-
-  useEffect(() => {
-    setDisplayName(user?.displayName || "");
-  }, [user]);
+  const [menuOpen, setMenuOpen] = useState(false); // State to control mobile menu
 
   return (
-    <div className="w-full bg-gradient-to-r from-[#19284a] to-[#33526d] py-3">
-      <div className="navbar px-4 lg:px-12">
-        {/* Logo and Brand */}
-        <div className="navbar-start">
-          <Link to="/">
-            <span className="text-3xl font-bold text-white tracking-wider transition-all duration-300 hover:text-yellow-400">
-              Movie <span className="text-yellow-400">Por</span>tal
-            </span>
-          </Link>
-        </div>
+    <div className="w-full bg-gradient-to-r from-[#19284a] to-[#33526d] py-4 shadow-md">
+      <div className="container mx-auto flex justify-between items-center px-4 lg:px-0">
+        {/* Logo */}
+        <Link to="/" className="flex items-center space-x-2">
+          <span className="text-3xl font-bold text-white tracking-wider transition-all duration-300 hover:text-yellow-400">
+            Movie<span className="text-yellow-400">Portal</span>
+          </span>
+        </Link>
 
-        {/* Navigation Links */}
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu text-white menu-horizontal space-x-8 text-lg">
-            <NavLink
-              to="/"
-              className="hover:text-gray-200 transition-all duration-300 p-2 rounded-md hover:shadow-xl hover:bg-gray-700"
-              activeClassName="bg-yellow-400 text-black shadow-xl"
-            >
-              Home
-            </NavLink>
-            <NavLink
-              to="/all-movies"
-              className="hover:text-gray-200 transition-all duration-300 p-2 rounded-md hover:shadow-xl hover:bg-gray-700"
-              activeClassName="bg-yellow-400 text-black shadow-xl"
-            >
-              All Movies
-            </NavLink>
-            {user && user.email && (
-              <>
-                <NavLink
-                  to="/add-movie"
-                  className="hover:text-gray-200 transition-all duration-300 p-2 rounded-md hover:shadow-xl hover:bg-gray-700"
-                  activeClassName="bg-yellow-400 text-black shadow-xl"
-                >
-                  Add Movie
-                </NavLink>
-                <NavLink
-                  to="/my-favorites"
-                  className="hover:text-gray-200 transition-all duration-300 p-2 rounded-md hover:shadow-xl hover:bg-gray-700"
-                  activeClassName="bg-yellow-400 text-black shadow-xl"
-                >
-                  My Favorites
-                </NavLink>
-              </>
-            )}
-            <NavLink
-              to="/about"
-              className="hover:text-gray-200 transition-all duration-300 p-2 rounded-md hover:shadow-xl hover:bg-gray-700"
-              activeClassName="bg-yellow-400 text-black shadow-xl"
-            >
-              About
-            </NavLink>
-            <NavLink
-              to="/contact"
-              className="hover:text-gray-200 transition-all duration-300 p-2 rounded-md hover:shadow-xl hover:bg-gray-700"
-              activeClassName="bg-yellow-400 text-black shadow-xl"
-            >
-              Contact
-            </NavLink>
-          </ul>
-        </div>
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex space-x-8">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `p-2 rounded-md text-white transition-all duration-300 ${
+                isActive
+                  ? "bg-yellow-500 text-black shadow-xl"
+                  : "hover:text-yellow-400 hover:bg-gray-700"
+              }`
+            }
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to="/all-movies"
+            className={({ isActive }) =>
+              `p-2 rounded-md text-white transition-all duration-300 ${
+                isActive
+                  ? "bg-yellow-500 text-black shadow-xl"
+                  : "hover:text-yellow-400 hover:bg-gray-700"
+              }`
+            }
+          >
+            All Movies
+          </NavLink>
+          {user && user.email && (
+            <>
+              <NavLink
+                to="/add-movie"
+                className={({ isActive }) =>
+                  `p-2 rounded-md text-white transition-all duration-300 ${
+                    isActive
+                      ? "bg-yellow-500 text-black shadow-xl"
+                      : "hover:text-yellow-400 hover:bg-gray-700"
+                  }`
+                }
+              >
+                Add Movie
+              </NavLink>
+              <NavLink
+                to="/my-favorites"
+                className={({ isActive }) =>
+                  `p-2 rounded-md text-white transition-all duration-300 ${
+                    isActive
+                      ? "bg-yellow-500 text-black shadow-xl"
+                      : "hover:text-yellow-400 hover:bg-gray-700"
+                  }`
+                }
+              >
+                My Favorites
+              </NavLink>
+            </>
+          )}
+          <NavLink
+            to="/about"
+            className={({ isActive }) =>
+              `p-2 rounded-md text-white transition-all duration-300 ${
+                isActive
+                  ? "bg-yellow-500 text-black shadow-xl"
+                  : "hover:text-yellow-400 hover:bg-gray-700"
+              }`
+            }
+          >
+            About
+          </NavLink>
+          <NavLink
+            to="/contact"
+            className={({ isActive }) =>
+              `p-2 rounded-md text-white transition-all duration-300 ${
+                isActive
+                  ? "bg-yellow-500 text-black shadow-xl"
+                  : "hover:text-yellow-400 hover:bg-gray-700"
+              }`
+            }
+          >
+            Contact
+          </NavLink>
+        </nav>
 
         {/* User Section */}
-        <div className="ml-10 navbar-end space-x-6">
+        <div className="hidden lg:flex items-center space-x-4">
           {user && user.email ? (
-            <div className="flex flex-col md:flex-row justify-center gap-2 items-center space-x-4">
-              <div className="tooltip tooltip-bottom" data-tip={displayName}>
+            <div className="flex items-center space-x-3">
+              <div
+                className="tooltip tooltip-bottom"
+                data-tip={user?.displayName || "User"}
+              >
                 <img
                   src={user.photoURL}
-                  className="w-12 h-12 rounded-full cursor-pointer border-2 border-yellow-400"
-                  alt="User"
+                  className="w-10 h-10 rounded-full border-2 border-yellow-400"
+                  alt="User Avatar"
                 />
               </div>
               <button
                 onClick={logout}
-                className="btn bg-yellow-400 hover:bg-yellow-500 rounded-full transition-all duration-300 shadow-md"
+                className="px-4 py-2 bg-yellow-500 text-black font-medium rounded-lg hover:bg-yellow-500 transition-all duration-300 shadow-md"
               >
-                Log out
+                Logout
               </button>
             </div>
           ) : (
-            <div className="flex space-x-4">
+            <div className="space-x-3">
               <Link
                 to="/auth/login"
-                className="btn bg-gray-200 hover:bg-yellow-500 text-black rounded-full transition-all duration-300 shadow-md"
+                className="px-4 py-2 bg-gray-200 text-black font-medium rounded-lg hover:bg-yellow-500 transition-all duration-300 shadow-md"
               >
                 Login
               </Link>
               <Link
                 to="/auth/register"
-                className="btn bg-gray-200 hover:bg-yellow-500 text-black rounded-full transition-all duration-300 shadow-md"
+                className="px-4 py-2 bg-gray-200 text-black font-medium rounded-lg hover:bg-yellow-500 transition-all duration-300 shadow-md"
               >
                 Register
               </Link>
@@ -111,89 +135,136 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Dropdown for Small Screens */}
-        <div className="navbar-end z-10 lg:hidden">
-          <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-square btn-ghost">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 ml-4 text-yellow-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16m-7 6h7"
-                />
-              </svg>
-            </label>
-            <ul
-              tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow-lg bg-base-100 rounded-box w-52 text-black"
+        {/* Mobile Navigation */}
+        <div className="lg:hidden flex items-center">
+          <button
+            className="text-white focus:outline-none"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              <li>
-                <NavLink
-                  to="/"
-                  className="hover:bg-gray-700 p-2 rounded-md"
-                  activeClassName="bg-yellow-400 text-black shadow-xl"
-                >
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/all-movies"
-                  className="hover:bg-gray-700 p-2 rounded-md"
-                  activeClassName="bg-yellow-400 text-black shadow-xl"
-                >
-                  All Movies
-                </NavLink>
-              </li>
-              {user && user.email && (
-                <>
-                  <li>
-                    <NavLink
-                      to="/add-movie"
-                      className="hover:bg-gray-700 p-2 rounded-md"
-                      activeClassName="bg-yellow-400 text-black shadow-xl"
-                    >
-                      Add Movie
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to="/my-favorites"
-                      className="hover:bg-gray-700 p-2 rounded-md"
-                      activeClassName="bg-yellow-400 text-black shadow-xl"
-                    >
-                      My Favorites
-                    </NavLink>
-                  </li>
-                </>
-              )}
-              <li>
-                <NavLink
-                  to="/about"
-                  className="hover:bg-gray-700 p-2 rounded-md"
-                  activeClassName="bg-yellow-400 text-black shadow-xl"
-                >
-                  About
-                </NavLink>
-                <NavLink
-                  to="/contact"
-                  className="hover:bg-gray-700 p-2 rounded-md"
-                  activeClassName="bg-yellow-400 text-black shadow-xl"
-                >
-                  Contact
-                </NavLink>
-              </li>
-            </ul>
-          </div>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16m-7 6h7"
+              />
+            </svg>
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="lg:hidden bg-gray-800 text-white py-4">
+          <ul className="flex flex-col space-y-4 items-center">
+            <li>
+              <NavLink
+                to="/"
+                className="hover:bg-gray-700 px-4 py-2 rounded-md"
+                onClick={() => setMenuOpen(false)}
+              >
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/all-movies"
+                className="hover:bg-gray-700 px-4 py-2 rounded-md"
+                onClick={() => setMenuOpen(false)}
+              >
+                All Movies
+              </NavLink>
+            </li>
+            {user && user.email && (
+              <>
+                <li>
+                  <NavLink
+                    to="/add-movie"
+                    className="hover:bg-gray-700 px-4 py-2 rounded-md"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    Add Movie
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/my-favorites"
+                    className="hover:bg-gray-700 px-4 py-2 rounded-md"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    My Favorites
+                  </NavLink>
+                </li>
+              </>
+            )}
+            <li>
+              <NavLink
+                to="/about"
+                className="hover:bg-gray-700 px-4 py-2 rounded-md"
+                onClick={() => setMenuOpen(false)}
+              >
+                About
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/contact"
+                className="hover:bg-gray-700 px-4 py-2 rounded-md"
+                onClick={() => setMenuOpen(false)}
+              >
+                Contact
+              </NavLink>
+            </li>
+            {user && user.email ? (
+              <li className="flex flex-col items-center space-y-2">
+                <div className="tooltip tooltip-bottom" data-tip={user.displayName || "User"}>
+                  <img
+                    src={user.photoURL}
+                    alt="User Avatar"
+                    className="w-10 h-10 rounded-full border-2 border-yellow-400"
+                  />
+                </div>
+                <button
+                  onClick={() => {
+                    logout();
+                    setMenuOpen(false);
+                  }}
+                  className="bg-yellow-500 text-black px-4 py-2 rounded-md hover:bg-yellow-500"
+                >
+                  Logout
+                </button>
+              </li>
+            ) : (
+              <>
+                <li>
+                  <Link
+                    to="/auth/login"
+                    className="bg-gray-200 text-black px-4 py-2 rounded-md hover:bg-yellow-500"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    Login
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/auth/register"
+                    className="bg-gray-200 text-black px-4 py-2 rounded-md hover:bg-yellow-500"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    Register
+                  </Link>
+                </li>
+              </>
+            )}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };

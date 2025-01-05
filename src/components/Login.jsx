@@ -46,136 +46,95 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-50 to-blue-100 ">
+    <div
+      className="min-h-screen flex items-center justify-center bg-no-repeat bg-cover bg-gradient-to-r from-indigo-50 to-indigo-100 p-4"
+      style={{ backgroundImage: "url('https://i.ibb.co.com/27DNzh7/eb5cdea5-5f61-4c62-b4a4-0b8d92f292bf.webp')" }}
+    >
       <ToastContainer position="top-center" />
-      <div className="flex flex-col justify-center items-center py-12 mx-4">
-        <div className="text-center mb-10">
-          <h1 className="text-5xl font-bold text-gray-700 ">
-            Welcome Back!
-          </h1>
-          <p className="text-gray-600  mt-2">
-            Log in to your account to access amazing features.
-          </p>
-        </div>
-        <div className="card w-full rounded-xl max-w-xl shadow-xl bg-white  p-10 ">
-          <form onSubmit={handleLogin}>
-            {/* Email Field */}
-            <div className="form-control mb-4">
-              <label className="label">
-                <span className="label-text font-semibold text-gray-600 dark:text-gray-300">Email</span>
-              </label>
-              <div className="relative">
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Enter your email"
-                  className="input input-bordered pl-12 w-full "
-                  required
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <span className="absolute left-3 top-3.5 text-gray-400">
-                  {/* Email SVG */}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="2"
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M16.5 12.75L12 16.5m0 0L7.5 12.75m4.5 3.75V6.75M3.75 5.25h16.5A2.25 2.25 0 0122.5 7.5v9a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 16.5v-9A2.25 2.25 0 013.75 5.25z"
-                    />
-                  </svg>
-                </span>
-              </div>
+
+      <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8 relative z-10">
+        <h1 className="text-3xl font-bold text-center text-gray-700 mb-6">Welcome Back!</h1>
+        <p className="text-center text-gray-600 mb-8">
+          Log in to your account to explore amazing features.
+        </p>
+
+        <form onSubmit={handleLogin}>
+          {/* Email Field */}
+          <div className="mb-4">
+            <label className="block text-gray-600 font-semibold mb-2">Email</label>
+            <div className="relative">
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                className="w-full px-4 py-3 border rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-indigo-300"
+                required
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
+          </div>
 
-           
-            <div className="form-control mb-4">
-              <label className="label">
-                <span className="label-text font-semibold text-gray-600 ">Password</span>
-              </label>
-              <div className="relative">
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Enter your password"
-                  className="input input-bordered pl-12 w-full "
-                  required
-                />
-                <span className="absolute left-3 top-3.5 text-gray-400">
-                
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="2"
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M15.75 9a6.75 6.75 0 11-13.5 0 6.75 6.75 0 0113.5 0zM12 12l7.5 7.5m-1.5-6h-2.25"
-                    />
-                  </svg>
-                </span>
-              </div>
-              {error.signIn && (
-                <p className="text-red-600 text-sm mt-2">
-                  {error.signIn.replace("auth/", "").replace("-", " ")}
-                </p>
-              )}
-              <label className="label">
-                <Link
-                  to="/auth/login"
-                  className="label-text-alt text-sm link link-hover underline font-semibold text-blue-500 "
-                  state={{ email: email }}
-                >
-                  Forgot password?
-                </Link>
-              </label>
+          {/* Password Field */}
+          <div className="mb-4">
+            <label className="block text-gray-600 font-semibold mb-2">Password</label>
+            <div className="relative">
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter your password"
+                className="w-full px-4 py-3 border rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-indigo-300"
+                required
+              />
             </div>
-
-       
-            <div className="form-control mt-6">
-              <button
-                type="submit"
-                className="btn w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-white font-bold hover:from-yellow-500 hover:to-yellow-700"
-              >
-                Log In
-              </button>
-            </div>
-
-        
-            <div className="divider my-6">OR</div>
-
-            <button
-              onClick={handleGoogleSignIn}
-              className="btn btn-outline w-full flex justify-center items-center space-x-2"
-            >
-              <img src={google} className="w-6 h-6" alt="Google logo" />
-              <span>Continue with Google</span>
-            </button>
-
-     
-            <div className="text-center mt-4">
-              <p>
-                Don't have an account?{" "}
-                <Link
-                  to="/auth/register"
-                  className="text-blue-600 font-bold hover:underline"
-                >
-                  Register
-                </Link>
+            {error.signIn && (
+              <p className="text-red-500 text-sm mt-2">
+                {error.signIn.replace("auth/", "").replace("-", " ")}
               </p>
-            </div>
-          </form>
-        </div>
+            )}
+          </div>
+
+          <div className="flex items-center justify-between mb-6">
+            <label className="flex items-center text-sm text-gray-600">
+              <input type="checkbox" className="form-checkbox h-4 w-4 text-indigo-600" />
+              <span className="ml-2">Remember me</span>
+            </label>
+            <Link
+              to="/auth/forgot-password"
+              className="text-sm text-indigo-600 hover:underline"
+            >
+              Forgot password?
+            </Link>
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:from-yellow-500 hover:to-yellow-400 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-300"
+          >
+            Log In
+          </button>
+
+          <div className="my-6 text-center text-gray-500">OR</div>
+
+          <button
+            onClick={handleGoogleSignIn}
+            className="w-full flex items-center justify-center bg-gray-100 py-3 rounded-lg shadow hover:bg-gray-200 transition duration-300"
+          >
+            <img src={google} className="w-5 h-5 mr-3" alt="Google logo" />
+            Continue with Google
+          </button>
+        </form>
+
+        <p className="text-center text-gray-600 mt-6">
+          Don&apos;t have an account?{' '}
+          <Link
+            to="/auth/register"
+            className="text-indigo-600 font-semibold hover:underline"
+          >
+            Register
+          </Link>
+        </p>
       </div>
+
       <Helmet>
         <title>Login - Movie Portal</title>
       </Helmet>

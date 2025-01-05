@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import logo from "../assets/logo.png";
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 
 const AboutUs = () => {
     // Animation Variants
@@ -51,13 +52,14 @@ const AboutUs = () => {
                             Your one-stop destination for everything movies! From timeless classics to the latest blockbusters, 
                             we are dedicated to bringing you an unmatched movie experience.
                         </p>
-                        <motion.a
+                        <motion.div
                             href="#contact"
                             className="btn btn-outline btn-light bg-white hover:text-blue-500 mt-4 transition-all duration-300"
                             whileHover={{ scale: 1.1 }}
                         >
-                            Get in Touch
-                        </motion.a>
+                            <Link to='/contact' >Get in Touch</Link>
+                        
+                        </motion.div>
                     </div>
                 </div>
             </motion.div>

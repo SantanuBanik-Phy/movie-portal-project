@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 
 const Footer = () => {
@@ -168,20 +169,20 @@ data-tip="GitHub"
                         <h2 className="text-lg font-semibold mb-4">Company</h2>
                         <ul className="space-y-2">
                             <li>
-                                <a
-                                    href="#"
+                                <Link  
+                                    to="/"
                                     className="text-gray-300 hover:text-white"
                                 >
                                     Home
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a
-                                    href="#"
+                                <Link
+                                   to="/about"
                                     className="text-gray-300 hover:text-white"
                                 >
                                     About
-                                </a>
+                                </Link>
                             </li>
                             <li>
                                 <a
@@ -192,12 +193,12 @@ data-tip="GitHub"
                                 </a>
                             </li>
                             <li>
-                                <a
-                                    href="#"
+                                <Link
+                                   to="/contact"
                                     className="text-gray-300 hover:text-white"
                                 >
                                     Contact Us
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </div>
