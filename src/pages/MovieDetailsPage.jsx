@@ -107,7 +107,7 @@ const MovieDetailsPage = () => {
             });
             return;
         }
-
+    
         if (isFavorite) {
             Swal.fire({
                 title: "Info!",
@@ -117,14 +117,24 @@ const MovieDetailsPage = () => {
             });
             return;
         }
-
+    
         try {
             const response = await fetch("https://b10-a10-server-site.vercel.app/favorites", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ ...movie, userEmail: user.email }),
+                body: JSON.stringify({
+                    userEmail: user.email,
+                    movieId: movie._id,
+                    poster: movie.poster,
+                    title: movie.title,
+                    genre: movie.genre,
+                    duration: movie.duration,
+                    releaseYear: movie.releaseYear,
+                    rating: movie.rating,
+                    summary: movie.summary,
+                }),
             });
-
+    
             if (response.ok) {
                 Swal.fire({
                     title: "Success!",
@@ -133,6 +143,13 @@ const MovieDetailsPage = () => {
                     confirmButtonText: "OK",
                 });
                 setIsFavorite(true);
+            } else if (response.status === 409) {
+                Swal.fire({
+                    title: "Info!",
+                    text: "This movie is already in your favorites.",
+                    icon: "info",
+                    confirmButtonText: "OK",
+                });
             } else {
                 Swal.fire({
                     title: "Error!",
@@ -151,7 +168,7 @@ const MovieDetailsPage = () => {
             });
         }
     };
-
+    
     if (loading) {
         return (
             <div className="flex justify-center items-center min-h-screen">

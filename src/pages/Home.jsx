@@ -6,6 +6,7 @@ import UpcomingMovies from "../components/UpcomingMovies";
 import MovieNews from "../components/MovieNews";
 import { Helmet } from "react-helmet";
 import UserReviews from "../components/UserReviews";
+import NewsletterSection from "../components/NewsLetterSection";
 
 const Home = () => {
   const movies = useLoaderData() || [];
@@ -120,6 +121,10 @@ const Home = () => {
             User Reviews
           </h2>
           <UserReviews isDarkMode={isDarkMode} />
+        </div>
+        <div className="container mx-auto">
+         
+          <NewsletterSection></NewsletterSection>
         </div>
       </div>
       <Helmet>

@@ -24,7 +24,7 @@ const MyFavorites = () => {
                 setLoading(false);
             }
         };
-
+    
         fetchFavoriteMovies();
     }, [user]);
 
@@ -40,19 +40,21 @@ const MyFavorites = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
+                    // Send DELETE request with movieId and user email
                     const response = await fetch(`https://b10-a10-server-site.vercel.app/favorites/${movieId}`, {
                         method: "DELETE",
                         headers: {
                             "Content-Type": "application/json",
-                            email: user.email,
+                            email: user.email, // Pass the user's email
                         },
                     });
-
+    
                     if (response.ok) {
+                        // Remove the movie from the local state
                         setFavoriteMovies((prevFavorites) =>
-                            prevFavorites.filter((movie) => movie._id !== movieId)
+                            prevFavorites.filter((movie) => movie.movieId !== movieId)
                         );
-
+    
                         Swal.fire({
                             title: "Removed!",
                             text: "The movie has been removed from your favorites.",
@@ -77,6 +79,7 @@ const MyFavorites = () => {
             }
         });
     };
+    
 
     return (
         <div className="container mx-auto px-4 py-10">
@@ -131,7 +134,7 @@ const MyFavorites = () => {
                                     <td className="px-6 py-4 text-gray-700">{movie.rating}/5</td>
                                     <td className="px-6 py-4 text-center">
                                         <button
-                                            onClick={() => handleRemoveFavorite(movie._id)}
+                                            onClick={() => handleRemoveFavorite(movie.movieId)}
                                             className="bg-red-500 text-white py-2 px-4 rounded-lg text-sm font-semibold shadow-md hover:bg-red-600 transition-transform transform hover:scale-105"
                                         >
                                             Remove
