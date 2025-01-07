@@ -1,5 +1,5 @@
 <div align="center">
-  <img height="200" src=""  />
+  <img height="100" src="https://raw.githubusercontent.com/SantanuBanik-Phy/movie-portal-project/refs/heads/main/src/assets/movie-portal.png"  />
 </div>
 
 # Movie Portal
